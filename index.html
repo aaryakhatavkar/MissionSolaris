@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARIS: Mission Zulana - Clean Energy Awakening</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'solaris-navy': '#091322',
+                        'solaris-slate': '#132238',
+                        'solaris-panel': '#0E1A2D',
+                        'solaris-amber': '#F59E0B',
+                        'solaris-gold': '#FBBF24',
+                        'solaris-emerald': '#10B981',
+                        'solaris-coral': '#EA580C',
+                        'solaris-cyan': '#38BDF8',
+                        'solaris-sunset': '#FDBA74'
+                    },
+                    fontFamily: {
+                        'comic': ['Bangers', 'cursive'],
+                        'tech': ['Orbitron', 'sans-serif'],
+                        'display': ['Outfit', 'sans-serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'comic': '4px 4px 0px #000000',
+                        'comic-lg': '6px 6px 0px #000000',
+                        'comic-gold': '5px 5px 0px #F59E0B',
+                        'solar-glow': '0 0 25px rgba(245, 158, 11, 0.4)',
+                        'cyan-glow': '0 0 25px rgba(56, 189, 248, 0.35)',
+                        'emerald-glow': '0 0 25px rgba(16, 185, 129, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Exact Supplied Cinematic Backdrop */
+        .solaris-backdrop {
+            background-image: url('1000082399_2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #091322;
+        }
+
+        /* Glass Cockpit HUD Console with Cyan/Amber Glow */
+        .glass-console {
+            background: rgba(9, 19, 34, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(56, 189, 248, 0.42);
+            box-shadow: 0 0 35px rgba(2, 132, 199, 0.22), inset 0 0 20px rgba(245, 158, 11, 0.08);
+        }
+
+        .comic-border {
+            border: 3px solid #000000;
+        }
+        .comic-border-thick {
+            border: 4px solid #000000;
+        }
+
+        /* Natural Radiant Solar Sun Cursor */
+        .sun-cursor-mode {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%23F59E0B' stroke='%23000' stroke-width='1.5'/%3E%3Cpath d='M12 2v3m0 14v3M2 12h3m14 0h3m-3.5-6.5l-2.1 2.1m-8.8 8.8l-2.1 2.1m0-13l2.1 2.1m8.8 8.8l2.1 2.1' stroke='%23EA580C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 16 16, auto !important;
+        }
+
+        .solar-click-flare {
+            position: fixed;
+            pointer-events: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #FBBF24 0%, #EA580C 65%, transparent 100%);
+            border: 2px solid #FFFFFF;
+            transform: translate(-50%, -50%) scale(0.2);
+            animation: flare-pop 0.55s ease-out forwards;
+            z-index: 99999;
+        }
+        @keyframes flare-pop {
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; filter: drop-shadow(0 0 4px #F59E0B); }
+            50% { transform: translate(-50%, -50%) scale(2.2); opacity: 0.9; filter: drop-shadow(0 0 14px #EA580C); }
+            100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
+        }
+
+        /* Directional Left-to-Right Animated Button Swipes with Pure Black Hover Text */
+        .btn-swipe-yellow {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.25s ease-in-out, transform 0.15s ease-out;
+        }
+        .btn-swipe-yellow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #F59E0B;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-swipe-yellow:hover::before {
+            transform: scaleX(1);
+        }
+        .btn-swipe-yellow:hover, .btn-swipe-yellow:hover * {
+            color: #000000 !important;
+        }
+
+        .btn-swipe-white {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.25s ease-in-out, transform 0.15s ease-out;
+        }
+        .btn-swipe-white::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #FFFFFF;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-swipe-white:hover::before {
+            transform: scaleX(1);
+        }
+        .btn-swipe-white:hover, .btn-swipe-white:hover * {
+            color: #000000 !important;
+        }
+
+        /* Custom Range Slider with Centered Thumb */
+        input[type="range"].slider-centered {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            border-radius: 6px;
+            background: #091322;
+            outline: none;
+            border: 2px solid #000000;
+            cursor: pointer;
+            margin: 10px 0;
+            display: block;
+        }
+        input[type="range"].slider-centered::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #F59E0B;
+            border: 2.5px solid #000000;
+            box-shadow: 2px 2px 0px #000000;
+            cursor: grab;
+            margin-top: 0px;
+            transition: transform 0.1s ease, background-color 0.2s;
+        }
+        input[type="range"].slider-centered:active::-webkit-slider-thumb {
+            cursor: grabbing;
+            transform: scale(1.22);
+            background: #10B981;
+        }
+        input[type="range"].slider-centered::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #F59E0B;
+            border: 2.5px solid #000000;
+            box-shadow: 2px 2px 0px #000000;
+            cursor: grab;
+        }
+
+        /* Superhero Animations */
+        @keyframes patrol-weaver {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            35% { transform: translateY(-14px) translateX(12px) rotate(2.5deg); }
+            70% { transform: translateY(8px) translateX(-8px) rotate(-1.5deg); }
+            100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        }
+        .moving-weaver {
+            animation: patrol-weaver 6.5s ease-in-out infinite;
+        }
+
+        @keyframes shield-orbit-aegis {
+            0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.45)); }
+            50% { transform: translateY(-8px); filter: drop-shadow(0 0 22px rgba(245, 158, 11, 0.85)); }
+        }
+        .moving-aegis {
+            animation: shield-orbit-aegis 4.5s ease-in-out infinite;
+        }
+
+        @keyframes hud-scan-forge {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.85)); }
+        }
+        .moving-forge {
+            animation: hud-scan-forge 4s ease-in-out infinite;
+        }
+
+        @keyframes seismic-pulse-titan {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.4)); }
+            50% { transform: scale(1.04) translateY(-3px); filter: drop-shadow(0 0 22px rgba(16, 185, 129, 0.85)); }
+        }
+        .moving-titan {
+            animation: seismic-pulse-titan 5s ease-in-out infinite;
+        }
+
+        /* Soundwave & Speaking Animation */
+        .speaking-soundwave {
+            display: inline-flex;
+            gap: 2.5px;
+            align-items: flex-end;
+            height: 14px;
+        }
+        .speaking-soundwave span {
+            width: 3px;
+            background: #F59E0B;
+            border-radius: 2px;
+            animation: wave-bar 0.6s infinite ease-in-out alternate;
+        }
+        .speaking-soundwave span:nth-child(1) { height: 4px; animation-delay: 0.1s; }
+        .speaking-soundwave span:nth-child(2) { height: 13px; animation-delay: 0.25s; }
+        .speaking-soundwave span:nth-child(3) { height: 8px; animation-delay: 0.4s; }
+        @keyframes wave-bar { 0% { height: 3px; } 100% { height: 14px; } }
+
+        @keyframes avatar-talk {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.06) translateY(-2px); }
+        }
+        .is-speaking {
+            animation: avatar-talk 0.45s infinite ease-in-out;
+        }
+
+        @keyframes pop-bounce {
+            0% { transform: scale(0.3); opacity: 0; }
+            70% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-in {
+            animation: pop-bounce 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes shake-wrong {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        .shake-animation {
+            animation: shake-wrong 0.4s ease-in-out;
+        }
+
+        /* Comic Speech Bubble */
+        .comic-speech-bubble {
+            position: relative;
+            background: #091322;
+            border: 3px solid #F59E0B;
+            box-shadow: 4px 4px 0px #000000;
+        }
+        .comic-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 28px;
+            border-width: 12px 10px 0;
+            border-style: solid;
+            border-color: #F59E0B transparent;
+            display: block;
+            width: 0;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #091322; }
+        ::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 4px; }
+    </style>
+</head>
+<body class="solaris-backdrop min-h-screen text-slate-100 font-sans flex flex-col selection:bg-solaris-amber selection:text-black">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="border-b-4 border-black bg-solaris-navy/95 backdrop-blur-md sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3 relative z-10">
+            
+            <!-- Branding with Radiant Sun Badge -->
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 bg-solaris-amber rounded-xl comic-border flex items-center justify-center font-comic text-2xl text-black shadow-comic transform -rotate-3 hover:rotate-0 transition">
+                    <i class="fa-solid fa-sun text-slate-950 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-comic tracking-wider text-solaris-amber drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                        SOLARIS <span class="text-white">MISSION ZULANA</span>
+                    </h1>
+                    <p class="text-[11px] font-bold text-solaris-sunset tracking-wider uppercase flex items-center gap-1.5 font-display">
+                        <span class="w-2 h-2 rounded-full bg-solaris-emerald animate-pulse"></span>
+                        TEAM SOLARIS • UN SDG 7 CLEAN ENERGY SQUADRON
+                    </p>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <!-- Re-watch Prologue Button -->
+                <button onclick="openPrologueModal()" class="btn-swipe-yellow px-3 py-1.5 bg-solaris-slate text-solaris-amber text-xs font-bold rounded-lg comic-border shadow-comic flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span class="hidden sm:inline">PROLOGUE</span>
+                </button>
+
+                <!-- Voice Dictation Global Toggle -->
+                <button id="voiceToggleBtn" onclick="toggleVoiceAudio()" class="btn-swipe-yellow px-3 py-1.5 bg-solaris-slate text-slate-200 text-xs font-bold rounded-lg comic-border shadow-comic flex items-center gap-1.5 transition">
+                    <i id="voiceIcon" class="fa-solid fa-volume-high text-solaris-amber"></i>
+                    <span id="voiceLabel" class="hidden sm:inline">VOICE ON</span>
+                </button>
+
+                <!-- SFX Toggle -->
+                <button id="soundToggleBtn" onclick="toggleAudio()" class="btn-swipe-yellow px-3 py-1.5 bg-solaris-slate text-slate-200 text-xs font-bold rounded-lg comic-border shadow-comic flex items-center gap-1.5 transition">
+                    <i id="soundIcon" class="fa-solid fa-bell text-solaris-emerald"></i>
+                    <span id="soundLabel" class="hidden sm:inline">SFX ON</span>
+                </button>
+
+                <!-- Jump to Simulator -->
+                <button onclick="scrollToSection('sandbox-section')" class="btn-swipe-yellow px-3.5 py-1.5 bg-solaris-slate text-solaris-gold text-xs font-tech font-bold rounded-lg comic-border shadow-comic transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-solar-panel"></i>
+                    <span>SIMULATOR</span>
+                </button>
+
+                <!-- Main Quiz Button -->
+                <button onclick="openQuizModal()" class="btn-swipe-white px-4 py-1.5 bg-solaris-amber text-black text-xs font-tech font-black rounded-lg comic-border shadow-comic transition transform hover:scale-105 flex items-center gap-1.5">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>PLAY A QUIZ</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-6 space-y-10 relative z-10">
+
+        <!-- HERO COCKPIT HUD CONSOLE -->
+        <section class="relative glass-console rounded-2xl comic-border shadow-comic-lg p-6 sm:p-10 overflow-hidden text-center">
+            <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+                
+                <!-- Alert Dispatch Pill -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-amber-500/20 border-2 border-solaris-amber text-solaris-gold text-xs font-bold rounded-full uppercase tracking-wider font-display">
+                    <i class="fa-solid fa-triangle-exclamation text-solaris-coral"></i>
+                    <span>EMERGENCY DISPATCH: HYPERION DAM BREACHED — OPERATION SUNBURST ACTIVE</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-comic tracking-wide text-white leading-tight">
+                    OPERATION SUNBURST: <br>
+                    <span class="text-solaris-amber">TURN EVERY ROOF</span> INTO A <span class="text-solaris-gold underline decoration-wavy">POWER STATION!</span>
+                </h2>
+
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                    When the central <strong class="text-solaris-amber">Hyperion Dam</strong> was breached by Valdaria's strike, the tropical sanctuary of <strong class="text-white">Zulana</strong> collapsed into blackout. A centralized dam was an exposed single point of failure—leaving Zulana Central Hospital's infant incubators with only 48 hours of fuel! Join <strong class="text-solaris-gold">Team Solaris</strong> to deploy decentralized rooftop solar microgrids and Titan's storage banks.
+                </p>
+
+                <!-- Comic Speech Bubble Toast (Hidden by default, triggered on hero click) -->
+                <div id="hero-bubble-box" class="hidden max-w-xl mx-auto comic-speech-bubble p-3 sm:p-4 rounded-xl text-left transition transform pop-in">
+                    <div class="flex items-center justify-between border-b border-solaris-amber/40 pb-1 mb-2">
+                        <span id="hero-bubble-author" class="font-comic text-base text-solaris-amber tracking-wide">COMMANDER AEGIS</span>
+                        <span class="text-[10px] font-mono text-solaris-sunset uppercase">LIVE COMMS DISPATCH (0.8X SPEED)</span>
+                    </div>
+                    <p id="hero-bubble-text" class="text-xs sm:text-sm text-slate-100 italic leading-relaxed">
+                        "You cannot bomb a power grid that lives in every single home! Stand strong, Zulana!"
+                    </p>
+                </div>
+
+                <!-- LIVING, MOVING SUPERHERO SQUAD ROSTER (REAL AUTHENTIC VECTOR ART) -->
+                <div class="pt-2">
+                    <div class="text-xs font-mono uppercase text-solaris-sunset font-bold mb-3 tracking-wider flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-solaris-amber"></i>
+                        <span>ACTIVE SOLARIS SQUADRON PATROL (CLICK TO HEAR DISPATCH):</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl mx-auto">
+                        
+                        <!-- 1. Commander Aegis -->
+                        <div onclick="heroCharacterSpeak('aegis')" class="moving-aegis cursor-pointer p-3 bg-solaris-navy/95 rounded-xl comic-border border-2 border-blue-500 hover:border-solaris-gold transition group">
+                            <div class="w-20 h-20 mx-auto mb-1 flex items-center justify-center">
+                                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                                    <!-- Cape -->
+                                    <path d="M22 40 L10 88 L34 82 Z" fill="#1E3A8A"/>
+                                    <path d="M78 40 L90 88 L66 82 Z" fill="#1E3A8A"/>
+                                    <!-- Blue Armored Suit -->
+                                    <path d="M35 32 L65 32 L60 70 L40 70 Z" fill="#2563EB" stroke="#000" stroke-width="2"/>
+                                    <!-- Star on Chest -->
+                                    <polygon points="50,42 53,49 61,49 55,54 57,62 50,57 43,62 45,54 39,49 47,49" fill="#F59E0B"/>
+                                    <!-- Head & Beard -->
+                                    <circle cx="50" cy="22" r="10" fill="#FBCFE8" stroke="#000" stroke-width="1.5"/>
+                                    <path d="M42 22 Q50 34 58 22" fill="#1E293B"/>
+                                    <path d="M44 14 Q50 11 56 14 Q53 19 47 19 Z" fill="#0F172A"/>
+                                    <!-- Photonic Crystalline Shield with Radial Rings -->
+                                    <circle cx="72" cy="50" r="18" fill="#0284C7" opacity="0.95" stroke="#FFFFFF" stroke-width="2.5"/>
+                                    <circle cx="72" cy="50" r="13" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="2,2"/>
+                                    <polygon points="72,41 75,47 82,47 77,52 79,59 72,55 65,59 67,52 62,47 69,47" fill="#F59E0B"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-comic text-base text-blue-400 group-hover:text-solaris-gold transition">Cmdr. Aegis</h4>
+                            <p class="text-[10px] text-slate-300 font-mono">Photonic Shield</p>
+                        </div>
+
+                        <!-- 2. Forge -->
+                        <div onclick="heroCharacterSpeak('forge')" class="moving-forge cursor-pointer p-3 bg-solaris-navy/95 rounded-xl comic-border border-2 border-cyan-500 hover:border-solaris-amber transition group">
+                            <div class="w-20 h-20 mx-auto mb-1 flex items-center justify-center">
+                                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]">
+                                    <!-- Exosuit Body -->
+                                    <path d="M35 34 L65 34 L62 72 L38 72 Z" fill="#E2E8F0" stroke="#000" stroke-width="2"/>
+                                    <rect x="42" y="44" width="16" height="12" rx="2" fill="#0F172A"/>
+                                    <line x1="42" y1="50" x2="58" y2="50" stroke="#38BDF8" stroke-width="2"/>
+                                    <!-- Head & Optical Visor -->
+                                    <circle cx="50" cy="22" r="10" fill="#FBCFE8" stroke="#000" stroke-width="1.5"/>
+                                    <rect x="42" y="19" width="16" height="5" rx="1.5" fill="#38BDF8" stroke="#000" stroke-width="1"/>
+                                    <path d="M43 14 Q50 12 57 14 Q55 18 45 18 Z" fill="#1E293B"/>
+                                    <!-- Floating Holographic Data HUD Screens -->
+                                    <rect x="8" y="22" width="24" height="20" rx="2" fill="#38BDF8" opacity="0.35" stroke="#38BDF8" stroke-width="1.5"/>
+                                    <line x1="11" y1="27" x2="28" y2="27" stroke="#38BDF8" stroke-width="1.5"/>
+                                    <line x1="11" y1="32" x2="24" y2="32" stroke="#38BDF8" stroke-width="1.5"/>
+                                    <line x1="11" y1="37" x2="29" y2="37" stroke="#38BDF8" stroke-width="1.5"/>
+                                    <circle cx="20" cy="32" r="3" fill="#F59E0B" opacity="0.8"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-comic text-base text-cyan-400 group-hover:text-solaris-amber transition">Forge</h4>
+                            <p class="text-[10px] text-slate-300 font-mono">PV Architect</p>
+                        </div>
+
+                        <!-- 3. Weaver -->
+                        <div onclick="heroCharacterSpeak('weaver')" class="moving-weaver cursor-pointer p-3 bg-solaris-navy/95 rounded-xl comic-border border-2 border-emerald-500 hover:border-solaris-gold transition group">
+                            <div class="w-20 h-20 mx-auto mb-1 flex items-center justify-center">
+                                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]">
+                                    <!-- Energy Ribbon Trails -->
+                                    <path d="M12 78 Q35 42 50 50 Q65 58 88 18" fill="none" stroke="#10B981" stroke-width="2.5" stroke-dasharray="3,2"/>
+                                    <path d="M8 82 Q28 50 45 60 Q62 70 82 28" fill="none" stroke="#34D399" stroke-width="1.5"/>
+                                    <!-- Wingsuit Body -->
+                                    <path d="M42 30 L58 30 L54 68 L46 68 Z" fill="#047857" stroke="#000" stroke-width="1.8"/>
+                                    <!-- Head & Domino Mask -->
+                                    <circle cx="50" cy="20" r="9" fill="#FBCFE8" stroke="#000" stroke-width="1.5"/>
+                                    <path d="M43 18 Q50 16 57 18 Q55 22 50 21 Q45 22 43 18 Z" fill="#064E3B"/>
+                                    <circle cx="47" cy="19" r="1" fill="#FFFFFF"/>
+                                    <circle cx="53" cy="19" r="1" fill="#FFFFFF"/>
+                                    <!-- Aerodynamic Wings -->
+                                    <polygon points="42,35 15,22 34,48" fill="#10B981" stroke="#000" stroke-width="1.5"/>
+                                    <polygon points="58,35 85,22 66,48" fill="#10B981" stroke="#000" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-comic text-base text-emerald-400 group-hover:text-solaris-gold transition">Weaver</h4>
+                            <p class="text-[10px] text-slate-300 font-mono">Grid Connector</p>
+                        </div>
+
+                        <!-- 4. Titan -->
+                        <div onclick="heroCharacterSpeak('titan')" class="moving-titan cursor-pointer p-3 bg-solaris-navy/95 rounded-xl comic-border border-2 border-amber-600 hover:border-solaris-gold transition group">
+                            <div class="w-20 h-20 mx-auto mb-1 flex items-center justify-center">
+                                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">
+                                    <!-- Massive Stone Body -->
+                                    <path d="M20 32 L80 32 L74 76 L26 76 Z" fill="#78350F" stroke="#000" stroke-width="2.5"/>
+                                    <!-- Shoulders -->
+                                    <rect x="10" y="32" width="20" height="34" rx="5" fill="#92400E" stroke="#000" stroke-width="2"/>
+                                    <rect x="70" y="32" width="20" height="34" rx="5" fill="#92400E" stroke="#000" stroke-width="2"/>
+                                    <!-- Stone Head -->
+                                    <rect x="38" y="12" width="24" height="20" rx="4" fill="#92400E" stroke="#000" stroke-width="2"/>
+                                    <!-- Emerald Bio-Luminescent Eyes & Fissures -->
+                                    <circle cx="44" cy="20" r="2.5" fill="#10B981"/>
+                                    <circle cx="56" cy="20" r="2.5" fill="#10B981"/>
+                                    <path d="M30 40 Q45 52 40 68 M70 40 Q55 52 60 68" stroke="#10B981" stroke-width="2.5" fill="none"/>
+                                    <path d="M46 36 L52 46 L48 58" stroke="#10B981" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-comic text-base text-amber-500 group-hover:text-solaris-gold transition">Titan</h4>
+                            <p class="text-[10px] text-slate-300 font-mono">Storage Sentinel</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="pt-3 flex flex-wrap items-center justify-center gap-4">
+                    <button onclick="openQuizModal()" class="btn-swipe-white px-8 py-4 bg-solaris-amber text-black font-tech font-black text-base rounded-xl comic-border shadow-comic transition transform hover:scale-105 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                        <span>PLAY A QUIZ</span>
+                    </button>
+                    <button onclick="scrollToSection('sandbox-section')" class="btn-swipe-yellow px-6 py-4 bg-solaris-slate text-solaris-gold font-tech font-bold text-sm rounded-xl comic-border shadow-comic transition flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>EXPLORE SIMULATOR</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUIDED ZULANA MICROGRID SIMULATOR SECTION -->
+        <section id="sandbox-section" class="scroll-mt-24 glass-console rounded-2xl comic-border shadow-comic-lg p-5 sm:p-8 space-y-6">
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b-2 border-solaris-amber/30 pb-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-2.5 py-0.5 bg-solaris-emerald/20 border border-solaris-emerald text-solaris-emerald text-xs font-mono font-bold rounded uppercase">
+                        <i class="fa-solid fa-network-wired"></i>
+                        <span>DECENTRALIZED COMMAND SIMULATOR</span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-comic text-white mt-1">Zulana Microgrid Resilience Sandbox</h3>
+                    <p class="text-xs text-slate-300">Comic Lore Baseline: The Hyperion Dam outputs 700 kW (sufficient alone for the 600 kW load). Breach it to observe how decentralized rooftop solar and Titan's storage restore life-support!</p>
+                </div>
+                <div class="bg-solaris-navy/90 px-3 py-1.5 rounded-lg border border-solaris-amber/40 text-xs font-mono">
+                    GRID STATUS: <span id="sim-status-pill" class="font-bold text-solaris-emerald">100% RESILIENT</span>
+                </div>
+            </div>
+
+            <!-- FORGE'S GUIDED WALKTHROUGH BANNER (STEP-BY-STEP TEXT EXPLANATION) -->
+            <div class="bg-solaris-panel rounded-xl comic-border p-4 sm:p-5 space-y-3.5 border-solaris-cyan/40">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-xs font-bold text-solaris-cyan">
+                            <i class="fa-solid fa-microchip"></i>
+                        </span>
+                        <h4 class="font-comic text-lg sm:text-xl text-solaris-gold tracking-wide">
+                            FORGE'S GUIDED WALKTHROUGH: STEP-BY-STEP RESILIENCE
+                        </h4>
+                    </div>
+
+                    <!-- Step Indicators -->
+                    <div class="flex items-center gap-1.5 text-xs font-mono">
+                        <button onclick="setGuideStep(1)" id="step-btn-1" class="px-2.5 py-1 rounded bg-solaris-amber text-black font-bold">1</button>
+                        <button onclick="setGuideStep(2)" id="step-btn-2" class="px-2.5 py-1 rounded bg-solaris-slate text-slate-300 font-bold hover:bg-slate-700">2</button>
+                        <button onclick="setGuideStep(3)" id="step-btn-3" class="px-2.5 py-1 rounded bg-solaris-slate text-slate-300 font-bold hover:bg-slate-700">3</button>
+                        <button onclick="setGuideStep(4)" id="step-btn-4" class="px-2.5 py-1 rounded bg-solaris-slate text-slate-300 font-bold hover:bg-slate-700">4</button>
+                    </div>
+                </div>
+
+                <!-- Guided Explanation Text Content -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                    <div class="md:col-span-9 space-y-1.5">
+                        <div class="text-xs font-bold text-solaris-cyan uppercase font-mono" id="guide-step-title">
+                            STEP 1: THE CENTRALIZED SINGLE POINT OF FAILURE
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-200 leading-relaxed" id="guide-step-body">
+                            When Zulana relied solely on the 700 kW Hyperion Dam, power was concentrated in a single physical location. A single missile strike fractured the dam, plunging the entire nation into a 100% blackout. Zulana Central Hospital's 600 kW critical medical load was left with only 48 hours before emergency generators failed.
+                        </p>
+                    </div>
+                    <div class="md:col-span-3 flex justify-end">
+                        <button onclick="advanceGuideStep()" id="guide-action-btn" class="btn-swipe-white w-full md:w-auto px-4 py-2 bg-solaris-amber text-black font-tech font-bold text-xs rounded-lg comic-border shadow-comic">
+                            NEXT STEP ➔
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 INSTANT SCENARIO PRESETS -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onclick="applySimScenario('normal')" class="btn-swipe-yellow p-3 rounded-xl bg-solaris-navy/90 comic-border text-left text-xs transition border-slate-700">
+                    <div class="font-bold text-blue-400 font-mono mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-water"></i> SCENARIO 1: HYPERION DAM NORMAL
+                    </div>
+                    <p class="text-[11px] text-slate-300">Dam operates at 700 kW alone—fully powering the 600 kW hospital load, but vulnerable as a single point of failure.</p>
+                </button>
+                <button onclick="applySimScenario('breach')" class="btn-swipe-yellow p-3 rounded-xl bg-solaris-navy/90 comic-border text-left text-xs transition border-red-500/60">
+                    <div class="font-bold text-red-400 font-mono mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-burst"></i> SCENARIO 2: DAM BREACH CRISIS
+                    </div>
+                    <p class="text-[11px] text-slate-300">Dam attacked (0 kW). Without decentralized solar or battery reserves, hospital infant incubators face immediate flatline!</p>
+                </button>
+                <button onclick="applySimScenario('solar')" class="btn-swipe-yellow p-3 rounded-xl bg-solaris-navy/90 comic-border text-left text-xs transition border-solaris-amber/60">
+                    <div class="font-bold text-solaris-amber font-mono mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-sun"></i> SCENARIO 3: OPERATION SUNBURST
+                    </div>
+                    <p class="text-[11px] text-slate-300">Dam breached (0 kW), but decentralized rooftop solar (850 kW) & Titan's BESS deliver 1,060+ kW resilient clean power!</p>
+                </button>
+            </div>
+
+            <!-- SIMULATOR CONTROLS & VISUAL TELEMETRY MAP -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                
+                <!-- Controls Column -->
+                <div class="lg:col-span-5 space-y-5 bg-solaris-navy/95 p-4 sm:p-5 rounded-xl comic-border">
+                    
+                    <!-- Central Hyperion Dam Toggle -->
+                    <div class="flex items-center justify-between p-3.5 bg-solaris-slate/80 rounded-lg border border-slate-700">
+                        <div>
+                            <span class="text-xs font-bold text-slate-200 block">Central Hyperion Dam</span>
+                            <span class="text-[10px] text-slate-400 font-mono">Comic Baseline: 700 kW (Sufficient alone)</span>
+                        </div>
+                        <button id="dam-btn" onclick="toggleDamSim()" class="btn-swipe-white px-3 py-1.5 bg-blue-600/30 text-blue-300 border border-blue-400 text-xs font-tech font-bold rounded-lg transition">
+                            <i class="fa-solid fa-water mr-1"></i> ONLINE (700 kW)
+                        </button>
+                    </div>
+
+                    <!-- Decentralized Rooftop PV Slider -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span class="text-solaris-amber flex items-center gap-1.5">
+                                <i class="fa-solid fa-sun text-solaris-amber"></i> Decentralized Rooftop PV Sun
+                            </span>
+                            <span id="sim-sun-val" class="font-mono text-white">85% (850 kW)</span>
+                        </div>
+                        <input type="range" id="sim-sun-slider" min="0" max="100" value="85" oninput="runMicrogridSim()" class="slider-centered w-full">
+                        <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-0.5">
+                            <span>0% (Night)</span>
+                            <span>50% (Clouds)</span>
+                            <span>100% (Noon Peak)</span>
+                        </div>
+                    </div>
+
+                    <!-- Titan's BESS Storage Reserve Slider -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-1">
+                            <span class="text-solaris-emerald flex items-center gap-1.5">
+                                <i class="fa-solid fa-car-battery text-solaris-emerald"></i> Titan's BESS Storage Reserves
+                            </span>
+                            <span id="sim-bat-val" class="font-mono text-white">70% Reserve (210 kW)</span>
+                        </div>
+                        <input type="range" id="sim-bat-slider" min="0" max="100" value="70" oninput="runMicrogridSim()" class="slider-centered w-full">
+                        <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-0.5">
+                            <span>0% (Depleted)</span>
+                            <span>50% (Buffer)</span>
+                            <span>100% (Full Bank)</span>
+                        </div>
+                    </div>
+
+                    <!-- Character Guidance Commentary -->
+                    <div class="p-3 bg-solaris-slate/90 border border-slate-700 rounded-lg text-xs space-y-1">
+                        <span class="text-solaris-amber font-bold font-mono flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved"></i> <span id="sim-guide-name">Commander Aegis Debrief:</span>
+                        </span>
+                        <p id="sim-guide-text" class="text-[11px] text-slate-300 leading-normal italic">
+                            "The dam was once our entire nation's lifeline. But decentralized solar and Titan's battery storage ensure we never go dark again!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Simulation Visual Output Map with High-Resolution Photography Cards -->
+                <div class="lg:col-span-7 bg-solaris-navy/95 p-4 sm:p-5 rounded-xl comic-border space-y-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        
+                        <!-- 1. Hyperion Hydro Dam -->
+                        <div id="sim-card-dam" class="p-2.5 rounded-xl border-2 border-blue-500 bg-blue-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden group">
+                            <div class="w-full h-16 rounded-lg overflow-hidden mb-1 relative">
+                                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=400&q=80" alt="Hydro Dam" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-blue-900/30"></div>
+                            </div>
+                            <h5 class="font-bold text-[11px] text-white">Hyperion Dam</h5>
+                            <span id="sim-badge-dam" class="text-[10px] font-mono font-bold text-blue-400 mt-1">700 kW</span>
+                        </div>
+
+                        <!-- 2. Rooftop Solar Photovoltaic Plant -->
+                        <div id="sim-card-pv" class="p-2.5 rounded-xl border-2 border-solaris-amber bg-amber-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden group">
+                            <div class="w-full h-16 rounded-lg overflow-hidden mb-1 relative">
+                                <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=400&q=80" alt="Rooftop Solar" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-amber-900/30"></div>
+                            </div>
+                            <h5 class="font-bold text-[11px] text-white">Rooftop Solar</h5>
+                            <span id="sim-badge-pv" class="text-[10px] font-mono font-bold text-solaris-gold mt-1">850 kW</span>
+                        </div>
+
+                        <!-- 3. Titan's BESS Vault (Actual Battery Storage Station) -->
+                        <div id="sim-card-bat" class="p-2.5 rounded-xl border-2 border-solaris-emerald bg-emerald-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden group">
+                            <div class="w-full h-16 rounded-lg overflow-hidden mb-1 relative">
+                                <img src="https://images.unsplash.com/photo-1548611716-ad957e817e94?auto=format&fit=crop&w=400&q=80" alt="BESS Battery Vault" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-emerald-900/30"></div>
+                            </div>
+                            <h5 class="font-bold text-[11px] text-white">Titan's BESS</h5>
+                            <span id="sim-badge-bat" class="text-[10px] font-mono font-bold text-solaris-emerald mt-1">210 kW</span>
+                        </div>
+
+                        <!-- 4. Zulana Central Hospital -->
+                        <div id="sim-card-hospital" class="p-2.5 rounded-xl border-2 border-solaris-emerald bg-emerald-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden group">
+                            <div class="w-full h-16 rounded-lg overflow-hidden mb-1 relative">
+                                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80" alt="Zulana Central Hospital" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-emerald-900/30"></div>
+                            </div>
+                            <h5 class="font-bold text-[11px] text-white">Zulana Hospital</h5>
+                            <span id="sim-badge-hospital" class="text-[10px] font-mono font-bold text-solaris-emerald mt-1">100% ONLINE</span>
+                        </div>
+                    </div>
+
+                    <!-- Telemetry Flow Summary -->
+                    <div class="space-y-1.5 pt-3 border-t border-slate-800 text-xs font-mono">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Hyperion Hydro Dam:</span>
+                            <span id="sim-kw-dam" class="text-blue-400 font-bold">700 kW</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Decentralized PV Solar:</span>
+                            <span id="sim-kw-solar" class="text-solaris-gold font-bold">850 kW</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span>Titan's BESS Storage Reserve:</span>
+                            <span id="sim-kw-battery" class="text-solaris-emerald font-bold">210 kW</span>
+                        </div>
+                        <div class="flex justify-between items-center font-bold text-white pt-2 border-t border-slate-800">
+                            <span>Total Available Generation:</span>
+                            <span id="sim-kw-total" class="text-solaris-amber text-sm">1,760 kW (Critical Load: 600 kW)</span>
+                        </div>
+
+                        <!-- Dynamic Progress Bar -->
+                        <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-700 mt-2">
+                            <div id="sim-power-bar" class="bg-solaris-emerald h-full transition-all duration-300" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINITE PAGE CONCLUSION PANEL -->
+        <section class="glass-console rounded-2xl comic-border shadow-comic p-6 sm:p-8 space-y-5">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-solaris-amber/30 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-solaris-amber text-black flex items-center justify-center font-comic text-2xl comic-border shrink-0 shadow-comic">
+                        7
+                    </div>
+                    <div>
+                        <h4 class="font-comic text-2xl text-white tracking-wide">MISSION ACCOMPLISHED: ZULANA RESTORED</h4>
+                        <p class="text-xs text-slate-300 font-display">UN SDG 7: Ensure access to affordable, reliable, sustainable, and modern clean energy for all.</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-mono text-solaris-emerald font-bold bg-solaris-navy/90 px-3 py-1.5 rounded border border-solaris-emerald/40">
+                        100% CLEAN ENERGY BASTION
+                    </span>
+                </div>
+            </div>
+
+            <!-- Review Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div class="p-3 bg-solaris-navy/80 rounded-xl border border-slate-700">
+                    <span class="text-[10px] font-mono text-slate-400 block uppercase">Single Points of Failure</span>
+                    <span class="text-2xl font-tech font-bold text-solaris-emerald">0</span>
+                </div>
+                <div class="p-3 bg-solaris-navy/80 rounded-xl border border-slate-700">
+                    <span class="text-[10px] font-mono text-slate-400 block uppercase">Hospital ICU Voltage</span>
+                    <span class="text-2xl font-tech font-bold text-solaris-emerald">100%</span>
+                </div>
+                <div class="p-3 bg-solaris-navy/80 rounded-xl border border-slate-700">
+                    <span class="text-[10px] font-mono text-slate-400 block uppercase">Daily Tropical Peak Sun</span>
+                    <span class="text-2xl font-tech font-bold text-solaris-gold">&gt; 9 Hrs</span>
+                </div>
+                <div class="p-3 bg-solaris-navy/80 rounded-xl border border-slate-700">
+                    <span class="text-[10px] font-mono text-slate-400 block uppercase">Module Durability</span>
+                    <span class="text-2xl font-tech font-bold text-solaris-cyan">25-30 Yrs</span>
+                </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic text-center max-w-3xl mx-auto pt-2">
+                "You cannot wage war on a grid that lives in every single home. When communities generate their own clean electricity, true national resilience begins."
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t-4 border-black bg-solaris-navy py-6 text-center text-xs text-slate-400 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 space-y-1">
+            <p class="font-comic text-base tracking-wider text-solaris-sunset">MISSION SOLARIS • POWERING ZULANA • UN SDG 7</p>
+            <p>Empowering global communities through decentralized solar photovoltaic literacy and energy storage.</p>
+        </div>
+    </footer>
+
+    <!-- ANIMATED STORY PROLOGUE MODAL (SKIPPABLE INTRO) -->
+    <div id="prologue-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-lg">
+        <div class="relative w-full max-w-4xl max-h-[96vh] flex flex-col justify-between glass-console rounded-2xl comic-border shadow-comic-lg p-4 sm:p-6 text-slate-100 overflow-hidden">
+            
+            <!-- Prologue Header Bar -->
+            <div class="flex items-center justify-between border-b-2 border-solaris-amber/40 pb-2.5 mb-2.5">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-solaris-amber text-black flex items-center justify-center font-comic text-lg">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-comic text-xl sm:text-2xl text-solaris-gold tracking-wide">
+                            TEAM SOLARIS: <span class="text-white">MISSION ZULANA PROLOGUE</span>
+                        </h3>
+                        <p class="text-[10px] font-mono text-solaris-sunset uppercase">OFFICIAL NARRATIVE ARC • 4 COMIC PANELS</p>
+                    </div>
+                </div>
+
+                <!-- Prominent Skip Intro Button -->
+                <button onclick="skipPrologue()" class="btn-swipe-white px-4 py-1.5 bg-solaris-amber text-black font-tech font-black text-xs rounded-lg comic-border shadow-comic transition transform hover:scale-105 flex items-center gap-1.5">
+                    <span>SKIP INTRO</span>
+                    <i class="fa-solid fa-angles-right"></i>
+                </button>
+            </div>
+
+            <!-- Active Comic Panel Display Area -->
+            <div class="flex-grow flex flex-col justify-between space-y-3 py-1">
+                
+                <!-- Panel Header & Progress Indicator -->
+                <div class="flex items-center justify-between text-xs font-mono">
+                    <span id="prologue-panel-badge" class="px-2.5 py-0.5 bg-solaris-amber text-black font-comic rounded">
+                        PANEL 1 / 4 • THE CRISIS
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <div id="prologue-soundwave" class="speaking-soundwave">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span id="prologue-narrator-tag" class="text-solaris-cyan font-bold">NARRATOR: 0.8X SPEED</span>
+                    </div>
+                </div>
+
+                <!-- Comic Graphic & Narrative Text -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    
+                    <!-- Comic Vector Visual Frame -->
+                    <div class="md:col-span-6 bg-solaris-navy p-3 rounded-xl comic-border relative flex items-center justify-center overflow-hidden h-52 sm:h-64">
+                        <div id="prologue-svg-art" class="w-full h-full flex items-center justify-center">
+                            <!-- Injected Vector Scene -->
+                        </div>
+                    </div>
+
+                    <!-- Panel Narrative Dialogue Box -->
+                    <div class="md:col-span-6 flex flex-col justify-between space-y-3">
+                        <div class="p-4 bg-solaris-navy/90 rounded-xl comic-border border-solaris-amber/40 space-y-2">
+                            <h4 id="prologue-panel-title" class="text-base sm:text-lg font-comic text-solaris-gold tracking-wide">
+                                THE CRISIS STRIKES: MIDNIGHT OVER THE HYPERION DAM
+                            </h4>
+                            <p id="prologue-panel-text" class="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                                Loading comic narrative...
+                            </p>
+                        </div>
+
+                        <!-- Read Again / Audio Replay -->
+                        <div class="flex items-center gap-2">
+                            <button onclick="replayPrologueAudio()" class="btn-swipe-yellow px-3 py-1 bg-solaris-slate text-solaris-amber text-xs font-mono rounded-lg comic-border flex items-center gap-1.5">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>REPLAY NARRATION</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls & Step Dots -->
+                <div class="pt-2 border-t border-slate-800 flex items-center justify-between gap-3">
+                    <button onclick="prevProloguePanel()" id="prologue-prev-btn" class="btn-swipe-yellow px-4 py-2 bg-solaris-slate text-slate-300 font-tech font-bold text-xs rounded-lg comic-border disabled:opacity-40">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> PREV PANEL
+                    </button>
+
+                    <!-- Dot Indicators -->
+                    <div class="flex items-center gap-2">
+                        <div id="p-dot-0" class="w-3 h-3 rounded-full bg-solaris-amber transition"></div>
+                        <div id="p-dot-1" class="w-3 h-3 rounded-full bg-slate-700 transition"></div>
+                        <div id="p-dot-2" class="w-3 h-3 rounded-full bg-slate-700 transition"></div>
+                        <div id="p-dot-3" class="w-3 h-3 rounded-full bg-slate-700 transition"></div>
+                    </div>
+
+                    <button onclick="nextProloguePanel()" id="prologue-next-btn" class="btn-swipe-white px-5 py-2 bg-solaris-amber text-black font-tech font-black text-xs rounded-lg comic-border shadow-comic">
+                        NEXT PANEL <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- POP-UP QUIZ MODAL (COMPACT ZERO-SCROLL DIALOG) -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="relative w-full max-w-4xl max-h-[94vh] flex flex-col justify-between glass-console rounded-2xl comic-border shadow-comic-lg p-4 sm:p-6 text-slate-100 overflow-hidden">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b-2 border-solaris-amber/40 pb-2.5 mb-2.5">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-solaris-emerald animate-pulse"></span>
+                    <h3 class="font-comic text-xl sm:text-2xl text-solaris-gold tracking-wide">
+                        SOLARIS <span class="text-white">AWARENESS RECON</span>
+                    </h3>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- Read Aloud / Repeat Button -->
+                    <button id="modal-dictate-btn" onclick="repeatCurrentDictation()" title="Listen to question" class="btn-swipe-yellow w-8 h-8 rounded-lg bg-solaris-slate flex items-center justify-center text-xs comic-border shadow-comic text-solaris-amber">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <!-- Close / Abort Trigger -->
+                    <button onclick="requestAbortQuiz()" class="btn-swipe-yellow w-8 h-8 rounded-lg bg-red-600/80 hover:bg-red-600 flex items-center justify-center text-xs font-bold text-white comic-border shadow-comic">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 1: CHOOSE CHARACTER MENTOR SCREEN -->
+            <div id="modal-character-picker" class="space-y-4 py-2">
+                <div class="text-center space-y-1">
+                    <h4 class="font-comic text-2xl sm:text-3xl text-white">SELECT YOUR SOLARIS COMMS MENTOR</h4>
+                    <p class="text-xs text-slate-300">Your chosen mentor will accompany you and dictate every question aloud in their voice!</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                    <!-- Aegis -->
+                    <div onclick="selectModalMentor('aegis')" class="btn-swipe-yellow p-3 bg-solaris-navy hover:bg-solaris-slate rounded-xl comic-border text-center cursor-pointer transition transform hover:scale-105 border-slate-700">
+                        <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-blue-600 flex items-center justify-center text-2xl text-white shadow border border-white">
+                            <i class="fa-solid fa-shield"></i>
+                        </div>
+                        <h5 class="font-comic text-lg text-blue-400">Cmdr. Aegis</h5>
+                        <p class="text-[10px] text-slate-300 font-mono">Squad Leader</p>
+                    </div>
+                    <!-- Forge -->
+                    <div onclick="selectModalMentor('forge')" class="btn-swipe-yellow p-3 bg-solaris-navy hover:bg-solaris-slate rounded-xl comic-border text-center cursor-pointer transition transform hover:scale-105 border-slate-700">
+                        <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-cyan-600 flex items-center justify-center text-2xl text-white shadow border border-white">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h5 class="font-comic text-lg text-cyan-400">Forge</h5>
+                        <p class="text-[10px] text-slate-300 font-mono">PV Architect</p>
+                    </div>
+                    <!-- Weaver -->
+                    <div onclick="selectModalMentor('weaver')" class="btn-swipe-yellow p-3 bg-solaris-navy hover:bg-solaris-slate rounded-xl comic-border text-center cursor-pointer transition transform hover:scale-105 border-slate-700">
+                        <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-emerald-600 flex items-center justify-center text-2xl text-white shadow border border-white">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h5 class="font-comic text-lg text-emerald-400">Weaver</h5>
+                        <p class="text-[10px] text-slate-300 font-mono">Grid Connector</p>
+                    </div>
+                    <!-- Titan -->
+                    <div onclick="selectModalMentor('titan')" class="btn-swipe-yellow p-3 bg-solaris-navy hover:bg-solaris-slate rounded-xl comic-border text-center cursor-pointer transition transform hover:scale-105 border-slate-700">
+                        <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-amber-700 flex items-center justify-center text-2xl text-white shadow border border-white">
+                            <i class="fa-solid fa-car-battery"></i>
+                        </div>
+                        <h5 class="font-comic text-lg text-amber-500">Titan</h5>
+                        <p class="text-[10px] text-slate-300 font-mono">Storage Sentinel</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: ACTIVE QUESTION SCREEN -->
+            <div id="modal-quiz-active" class="hidden flex-grow flex flex-col justify-between space-y-3">
+                <!-- Meta Status -->
+                <div class="flex items-center justify-between text-xs font-mono">
+                    <div class="flex items-center gap-2">
+                        <span id="modal-step-badge" class="px-2 py-0.5 bg-solaris-amber text-black font-comic rounded">MISSION 1 / 15</span>
+                        <span id="modal-category-badge" class="text-slate-300">Photovoltaic Physics</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div id="speaker-wave" class="speaking-soundwave hidden">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="text-solaris-gold font-bold">SCORE: <span id="modal-score-badge" class="text-white">0</span>/15</span>
+                    </div>
+                </div>
+
+                <!-- Main Question Grid: Square Visual Graphic + Text & Options -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
+                    
+                    <!-- Medium Square Illustration Card with Active Character Avatar Overlay -->
+                    <div class="md:col-span-5 flex flex-col items-center justify-center bg-solaris-navy/90 p-2 rounded-xl comic-border relative">
+                        <div id="modal-svg-container" class="w-40 h-40 sm:w-48 sm:h-48 aspect-square flex items-center justify-center">
+                            <!-- Injected Vector Illustration -->
+                        </div>
+                        <!-- Talking Mentor Badge -->
+                        <div class="absolute bottom-2 left-2 flex items-center gap-2 bg-solaris-slate px-2 py-1 rounded-lg border border-slate-600">
+                            <span id="mentor-avatar-badge" class="text-solaris-amber font-bold text-sm">
+                                <i class="fa-solid fa-shield"></i>
+                            </span>
+                            <span id="mentor-name-badge" class="text-[11px] font-comic text-solaris-gold">Cmdr. Aegis</span>
+                        </div>
+                    </div>
+
+                    <!-- Question Prompt & 2 Randomized Options -->
+                    <div class="md:col-span-7 flex flex-col justify-between space-y-3">
+                        <h4 id="modal-q-text" class="text-base sm:text-lg font-bold text-white leading-snug">
+                            Question loading...
+                        </h4>
+
+                        <!-- 2 Choices (Randomized Positions) -->
+                        <div class="space-y-2">
+                            <button id="modal-opt-0" onclick="handleOptionSelect(0)" class="btn-swipe-yellow w-full text-left p-3 rounded-xl border-2 border-slate-700 bg-solaris-navy hover:bg-solaris-slate text-xs sm:text-sm font-semibold transition comic-border shadow-comic flex items-center justify-between">
+                                <span id="modal-opt-0-text">Option A</span>
+                                <span id="modal-opt-0-icon" class="text-base hidden"></span>
+                            </button>
+
+                            <button id="modal-opt-1" onclick="handleOptionSelect(1)" class="btn-swipe-yellow w-full text-left p-3 rounded-xl border-2 border-slate-700 bg-solaris-navy hover:bg-solaris-slate text-xs sm:text-sm font-semibold transition comic-border shadow-comic flex items-center justify-between">
+                                <span id="modal-opt-1-text">Option B</span>
+                                <span id="modal-opt-1-icon" class="text-base hidden"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instant Response & 30-40 Word Explanation Box -->
+                <div id="modal-feedback-box" class="hidden transition-all duration-300">
+                    <div id="modal-feedback-banner" class="p-3 rounded-xl comic-border flex items-center justify-between gap-3 shadow-comic bg-solaris-navy/95 border-slate-700">
+                        <div class="flex items-center gap-2.5">
+                            <div id="modal-feedback-icon" class="w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold shadow-comic shrink-0"></div>
+                            <div>
+                                <span id="modal-feedback-title" class="font-comic text-base tracking-wide">STATUS</span>
+                                <p id="modal-feedback-expl" class="text-[11px] sm:text-xs text-slate-200 leading-snug mt-0.5">
+                                    30-40 word tactical solar clarification.
+                                </p>
+                            </div>
+                        </div>
+                        <button onclick="goToNextQuestion()" class="btn-swipe-white px-4 py-2 bg-solaris-amber text-black font-tech font-black text-xs rounded-lg comic-border shadow-comic shrink-0">
+                            NEXT MISSION ➔
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STEP 3: RESULTS SCREEN -->
+            <div id="modal-quiz-results" class="hidden py-4 text-center space-y-4">
+                <div class="w-16 h-16 mx-auto bg-solaris-amber rounded-full comic-border flex items-center justify-center text-3xl text-black shadow-comic">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h4 class="text-3xl font-comic text-solaris-gold">OPERATION SUNBURST COMPLETE!</h4>
+                
+                <div class="text-3xl font-tech font-black text-white">
+                    FINAL SCORE: <span id="final-score-val" class="text-solaris-gold">0</span> / 15
+                </div>
+
+                <div class="p-4 bg-solaris-navy/90 rounded-xl comic-border max-w-lg mx-auto border-slate-700">
+                    <p id="final-tier-msg" class="text-sm font-bold text-white leading-relaxed">
+                        Tier feedback will appear here.
+                    </p>
+                </div>
+
+                <div class="flex justify-center gap-3 pt-2">
+                    <button onclick="resetAndRestartQuiz()" class="btn-swipe-white px-5 py-2.5 bg-solaris-amber text-black font-tech font-bold text-xs rounded-xl comic-border shadow-comic">
+                        PLAY AGAIN
+                    </button>
+                    <button onclick="closeQuizModalImmediately()" class="btn-swipe-yellow px-5 py-2.5 bg-solaris-slate text-white font-tech font-bold text-xs rounded-xl comic-border shadow-comic">
+                        RETURN TO CONSOLE
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ABORT CONFIRMATION MODAL -->
+    <div id="abort-confirm-modal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="w-full max-w-md bg-solaris-navy border-4 border-red-500 rounded-2xl p-6 shadow-comic-lg text-center space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full bg-red-600/30 border-2 border-red-500 flex items-center justify-center text-2xl text-red-400">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 class="font-comic text-2xl text-red-400 tracking-wider">ABORT ACTIVE MISSION?</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Are you sure you want to exit? Your solar recon progress will end now!
+            </p>
+
+            <div class="p-3 bg-solaris-slate border-2 border-slate-700 rounded-xl">
+                <div class="text-[11px] font-mono text-slate-400 uppercase">CURRENT SCORE ACHIEVED</div>
+                <div id="abort-live-score" class="text-3xl font-tech font-black text-solaris-amber mt-1">0 / 15</div>
+                <p id="abort-mentor-line" class="text-[11px] text-slate-300 italic mt-1 font-sans">
+                    Commander Aegis: "Zulana still needs every kilowatt!"
+                </p>
+            </div>
+
+            <div class="flex justify-center gap-3 pt-2">
+                <button onclick="confirmAbortMission()" class="btn-swipe-white px-5 py-2 bg-red-600 hover:bg-red-500 text-white font-tech font-black text-xs rounded-xl comic-border shadow-comic">
+                    YES, ABORT & SHOW SCORE
+                </button>
+                <button onclick="cancelAbortMission()" class="btn-swipe-yellow px-5 py-2 bg-solaris-slate hover:bg-slate-700 text-solaris-amber font-tech font-bold text-xs rounded-xl comic-border shadow-comic">
+                    RESUME QUIZ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLASH SCORE OVERLAY ON EXIT -->
+    <div id="flash-score-overlay" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden">
+        <div class="w-full max-w-md bg-solaris-navy border-4 border-solaris-amber rounded-2xl p-6 shadow-comic text-center space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full bg-solaris-amber text-black flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h4 class="font-comic text-3xl text-solaris-gold tracking-wider">MISSION TERMINATED</h4>
+            <p class="text-xs text-slate-400">Final Telemetry Logged:</p>
+
+            <div class="p-4 bg-solaris-slate border-2 border-slate-700 rounded-xl space-y-2">
+                <div class="text-4xl font-tech font-black text-white" id="flash-score-text">0 / 15</div>
+                <div class="text-xs font-mono text-solaris-gold" id="flash-pct-text">0% Completed</div>
+                <p class="text-xs text-slate-300 italic" id="flash-dialogue-text">
+                    "Every lesson learned brings Zulana closer to clean resilience!"
+                </p>
+            </div>
+
+            <button onclick="dismissFlashOverlay()" class="btn-swipe-white px-6 py-2.5 bg-solaris-amber text-black font-tech font-black text-xs rounded-xl comic-border shadow-comic">
+                CLOSE TO CONSOLE
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================================
+        // 1. WEB AUDIO SYNTHESIZER
+        // =============================================================
+        const AudioFX = {
+            ctx: null,
+            enabled: true,
+            init() {
+                if (!this.ctx) {
+                    const AC = window.AudioContext || window.webkitAudioContext;
+                    if (AC) this.ctx = new AC();
+                }
+            },
+            playChime() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const t = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, t); // C5
+                osc.frequency.setValueAtTime(659.25, t + 0.08); // E5
+                osc.frequency.setValueAtTime(783.99, t + 0.16); // G5
+                gain.gain.setValueAtTime(0.2, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.36);
+            },
+            playBuzzer() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const t = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(140, t);
+                osc.frequency.setValueAtTime(90, t + 0.12);
+                gain.gain.setValueAtTime(0.25, t);
+                gain.gain.linearRampToValueAtTime(0.01, t + 0.3);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.31);
+            },
+            playPopper() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const t = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(800, t);
+                osc.frequency.exponentialRampToValueAtTime(100, t + 0.25);
+                gain.gain.setValueAtTime(0.4, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.26);
+            }
+        };
+
+        function toggleAudio() {
+            AudioFX.enabled = !AudioFX.enabled;
+            const icon = document.getElementById('soundIcon');
+            const label = document.getElementById('soundLabel');
+            if (AudioFX.enabled) {
+                icon.className = 'fa-solid fa-bell text-solaris-emerald';
+                label.textContent = 'SFX ON';
+                AudioFX.playChime();
+            } else {
+                icon.className = 'fa-solid fa-bell-slash text-slate-500';
+                label.textContent = 'MUTED';
+            }
+        }
+
+        // =============================================================
+        // 2. WEB SPEECH SYNTHESIS ENGINE (Calibrated for 0.8X Speed)
+        // =============================================================
+        const SpeechEngine = {
+            enabled: true,
+            currentMentor: 'aegis',
+            profiles: {
+                aegis: {
+                    pitch: 0.95,
+                    rate: 0.8,
+                    preferredKeywords: ['David', 'Daniel', 'Alex', 'Male', 'Natural', 'Google US English']
+                },
+                forge: {
+                    pitch: 1.05,
+                    rate: 0.8,
+                    preferredKeywords: ['Google UK English Male', 'Oliver', 'George', 'Male', 'Natural']
+                },
+                weaver: {
+                    pitch: 1.15,
+                    rate: 0.82,
+                    preferredKeywords: ['Samantha', 'Victoria', 'Karen', 'Female', 'Natural', 'Google US English']
+                },
+                titan: {
+                    pitch: 0.72,
+                    rate: 0.76,
+                    preferredKeywords: ['Fred', 'Google UK English Male', 'Guy', 'Bass', 'Male']
+                },
+                narrator: {
+                    pitch: 1.0,
+                    rate: 0.8,
+                    preferredKeywords: ['Google US English', 'Natural', 'Daniel', 'Samantha']
+                }
+            },
+            pickBestClearVoice(profile) {
+                const voices = window.speechSynthesis.getVoices();
+                if (!voices || voices.length === 0) return null;
+                for (const kw of profile.preferredKeywords) {
+                    const match = voices.find(v => 
+                        v.name.toLowerCase().includes(kw.toLowerCase()) || 
+                        (v.lang && v.lang.startsWith('en') && v.name.toLowerCase().includes(kw.toLowerCase()))
+                    );
+                    if (match) return match;
+                }
+                const naturalEng = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google')));
+                if (naturalEng) return naturalEng;
+                return voices.find(v => v.lang.startsWith('en')) || voices[0];
+            },
+            speak(text, onStartCallback = null, onEndCallback = null) {
+                if (!this.enabled || !window.speechSynthesis) return;
+                window.speechSynthesis.cancel();
+                const cleanText = text.replace(/[\*\#\_\[\]]/g, '').trim();
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                const profile = this.profiles[this.currentMentor] || this.profiles.aegis;
+
+                utterance.pitch = profile.pitch;
+                utterance.rate = profile.rate; // Calibrated 0.8x speed
+
+                const chosenVoice = this.pickBestClearVoice(profile);
+                if (chosenVoice) utterance.voice = chosenVoice;
+
+                utterance.onstart = () => {
+                    const avatar = document.getElementById('mentor-avatar-badge');
+                    const wave = document.getElementById('speaker-wave');
+                    const pWave = document.getElementById('prologue-soundwave');
+                    if (avatar) avatar.classList.add('is-speaking');
+                    if (wave) wave.classList.remove('hidden');
+                    if (pWave) pWave.classList.remove('hidden');
+                    if (onStartCallback) onStartCallback();
+                };
+                utterance.onend = () => {
+                    const avatar = document.getElementById('mentor-avatar-badge');
+                    const wave = document.getElementById('speaker-wave');
+                    const pWave = document.getElementById('prologue-soundwave');
+                    if (avatar) avatar.classList.remove('is-speaking');
+                    if (wave) wave.classList.add('hidden');
+                    if (pWave) pWave.classList.add('hidden');
+                    if (onEndCallback) onEndCallback();
+                };
+                utterance.onerror = () => {
+                    const avatar = document.getElementById('mentor-avatar-badge');
+                    const wave = document.getElementById('speaker-wave');
+                    const pWave = document.getElementById('prologue-soundwave');
+                    if (avatar) avatar.classList.remove('is-speaking');
+                    if (wave) wave.classList.add('hidden');
+                    if (pWave) pWave.classList.add('hidden');
+                };
+
+                window.speechSynthesis.speak(utterance);
+            }
+        };
+
+        if (typeof window !== 'undefined' && window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+
+        function toggleVoiceAudio() {
+            SpeechEngine.enabled = !SpeechEngine.enabled;
+            const icon = document.getElementById('voiceIcon');
+            const label = document.getElementById('voiceLabel');
+            if (SpeechEngine.enabled) {
+                icon.className = 'fa-solid fa-volume-high text-solaris-amber';
+                label.textContent = 'VOICE ON';
+                SpeechEngine.speak("Voice narration enabled.");
+            } else {
+                window.speechSynthesis.cancel();
+                icon.className = 'fa-solid fa-volume-xmark text-slate-500';
+                label.textContent = 'VOICE OFF';
+            }
+        }
+
+        // =============================================================
+        // 3. ANIMATED COMIC PROLOGUE (4-PANEL SEQUENTIAL ARC)
+        // =============================================================
+        const prologuePanels = [
+            {
+                number: 1,
+                badge: "PANEL 1 / 4 • THE CRISIS",
+                title: "THE CRISIS STRIKES: MIDNIGHT OVER THE HYPERION DAM",
+                text: "Zulana: A tropical sanctuary powered by one monumental feat of engineering—the Hyperion Dam. At midnight, Valdaria launched a precision strike, rupturing the dam wall! Total national blackout: 100%. At Zulana Central Hospital, emergency backup generators had only forty-eight hours before infant incubators would fail.",
+                narrateText: "Zulana: A tropical sanctuary powered by one monumental feat of engineering—the Hyperion Dam. At midnight, Valdaria launched a precision strike, rupturing the dam wall. Total national blackout: one hundred percent. Inside Zulana Central Hospital, doctors had forty-eight hours before emergency generators died and infant incubators lost their heat.",
+                svg: `<svg viewBox="0 0 200 140" class="w-full h-full">
+                    <rect width="200" height="140" fill="#091322"/>
+                    <!-- Night sky & Lightning -->
+                    <path d="M120 10 L115 35 L125 40 L110 70" stroke="#FBBF24" stroke-width="2" fill="none"/>
+                    <!-- Dark Clouds -->
+                    <ellipse cx="60" cy="25" rx="45" ry="18" fill="#1E293B"/>
+                    <ellipse cx="140" cy="20" rx="50" ry="16" fill="#1E293B"/>
+                    <!-- Fractured Hyperion Dam -->
+                    <polygon points="30,130 50,60 150,60 170,130" fill="#334155" stroke="#000" stroke-width="2"/>
+                    <!-- Crack in Dam -->
+                    <path d="M95 60 L102 85 L96 105 L108 130" stroke="#EA580C" stroke-width="3" fill="none"/>
+                    <!-- Gushing Water -->
+                    <path d="M96 85 Q115 110 130 135 M90 100 Q80 120 60 140 M102 90 Q105 115 110 140" stroke="#38BDF8" stroke-width="3" fill="none"/>
+                    <!-- Valdaria Gunships -->
+                    <polygon points="160,35 180,38 165,42" fill="#EA580C"/>
+                    <circle cx="168" cy="38" r="1.5" fill="#FBBF24"/>
+                    <!-- Blackout City Skyline -->
+                    <rect x="15" y="80" width="12" height="40" fill="#0F172A"/>
+                    <rect x="30" y="90" width="15" height="30" fill="#0F172A"/>
+                    <!-- Emergency Red Beacon on Hospital -->
+                    <rect x="165" y="85" width="22" height="35" fill="#0F172A"/>
+                    <circle cx="176" cy="85" r="3" fill="#EF4444"/>
+                </svg>`
+            },
+            {
+                number: 2,
+                badge: "PANEL 2 / 4 • THE SPLIT FRONT",
+                title: "THE SPLIT FRONT: HEROES HOLD THE BREACH",
+                text: "Commander Aegis and Forge head into the capital to organize response. Titan wades directly into the raging floodwaters, using his colossal stone body to hold the fractured concrete breach! Weaver takes to the skies, evacuating stranded families and redirecting enemy raiders. The frontline holds, but Zulana is running out of time in the dark.",
+                narrateText: "Classic two-prong maneuver! Commander Aegis and Forge race to the capital. Titan wades into the floodwaters, using his colossal stone body to brace the fracture. Weaver takes to the skies, evacuating stranded civilians. The frontline holds, but Zulana is running out of time in the dark.",
+                svg: `<svg viewBox="0 0 200 140" class="w-full h-full">
+                    <rect width="200" height="140" fill="#091322"/>
+                    <!-- Raging Water -->
+                    <path d="M0 100 Q50 90 100 105 Q150 120 200 100 L200 140 L0 140 Z" fill="#0284C7"/>
+                    <!-- Titan Holding Dam Breach -->
+                    <rect x="75" y="70" width="30" height="45" rx="5" fill="#78350F" stroke="#000" stroke-width="2"/>
+                    <circle cx="85" cy="62" r="8" fill="#92400E"/>
+                    <circle cx="95" cy="62" r="8" fill="#92400E"/>
+                    <!-- Titan Emerald Glow -->
+                    <path d="M80 75 Q90 85 85 98 M95 75 Q100 88 95 105" stroke="#10B981" stroke-width="2.5" fill="none"/>
+                    <rect x="50" y="60" width="25" height="55" fill="#334155" stroke="#000" stroke-width="1.5"/>
+                    <rect x="105" y="60" width="25" height="55" fill="#334155" stroke="#000" stroke-width="1.5"/>
+                    <!-- Weaver Flying in Air -->
+                    <path d="M140 30 Q160 38 180 20" stroke="#10B981" stroke-width="2" stroke-dasharray="2,2"/>
+                    <polygon points="160,25 150,20 155,32" fill="#10B981"/>
+                    <circle cx="155" cy="22" r="4" fill="#FBCFE8"/>
+                    <!-- Aegis Shield Silhouette -->
+                    <circle cx="35" cy="45" r="14" fill="#2563EB" stroke="#FBBF24" stroke-width="2"/>
+                    <polygon points="35,38 37,43 42,43 38,47 40,52 35,49 30,52 32,47 28,43 33,43" fill="#F59E0B"/>
+                </svg>`
+            },
+            {
+                number: 3,
+                badge: "PANEL 3 / 4 • DECENTRALIZED VISION",
+                title: "THE VERIDIAN ALLIANCE: DECENTRALIZED VISION",
+                text: "Forge points out that Zulana receives over 9 hours of peak tropical sun every single day: 'Don't rebuild one giant sitting duck—turn the entire country into the grid!' Veridia responds with an emergency clean-energy airlift of photovoltaic cells. Operation Sunburst mobilizes: every roof becomes a shield, every home an active power station!",
+                narrateText: "A massive hydro dam was an open invitation to attack! Forge reveals the solution: Look up. Look at what Zulana has every day: over nine hours of peak tropical sun! Veridia clean energy airlifts photovoltaic cells. Operation Sunburst mobilizes: every roof is a shield, every home is a power station!",
+                svg: `<svg viewBox="0 0 200 140" class="w-full h-full">
+                    <rect width="200" height="140" fill="#091322"/>
+                    <!-- Golden Tropical Sun -->
+                    <circle cx="160" cy="35" r="22" fill="#F59E0B" opacity="0.9"/>
+                    <circle cx="160" cy="35" r="16" fill="#FBBF24"/>
+                    <!-- Veridian Cargo Airlift Planes -->
+                    <polygon points="30,25 70,30 45,38" fill="#10B981" stroke="#000" stroke-width="1.5"/>
+                    <rect x="42" y="28" width="16" height="5" fill="#FFFFFF"/>
+                    <!-- Parachutes dropping solar cells -->
+                    <path d="M90 40 Q100 30 110 40 Z" fill="#38BDF8"/>
+                    <line x1="90" y1="40" x2="100" y2="52" stroke="#64748B"/>
+                    <line x1="110" y1="40" x2="100" y2="52" stroke="#64748B"/>
+                    <rect x="96" y="52" width="8" height="6" fill="#0284C7"/>
+                    <!-- Community Rooftops with Solar Panels Installed -->
+                    <polygon points="20,110 50,85 80,110" fill="#1E293B" stroke="#000" stroke-width="2"/>
+                    <rect x="25" y="110" width="50" height="25" fill="#0F172A"/>
+                    <!-- Blue Shimmering PV Panel on Roof -->
+                    <polygon points="32,102 50,88 68,102" fill="#0284C7" stroke="#F59E0B" stroke-width="1.5"/>
+                    <polygon points="110,115 140,90 170,115" fill="#1E293B" stroke="#000" stroke-width="2"/>
+                    <polygon points="122,108 140,93 158,108" fill="#0284C7" stroke="#F59E0B" stroke-width="1.5"/>
+                </svg>`
+            },
+            {
+                number: 4,
+                badge: "PANEL 4 / 4 • THE GRID IGNITES",
+                title: "THE GRID IGNITES: VALDARIA RETREATS",
+                text: "Titan secures high-capacity lithium storage banks (BESS) across every sector. Rooftop by rooftop, the darkness breaks! Zulana Central Hospital reaches 100% full voltage; infant incubators stabilize. Valdaria's commander aborts the war: 'Fall back! There is no dam left to bomb... their power is everywhere! You cannot wage war on a grid that lives in every single home.'",
+                narrateText: "Titan secures high-capacity lithium storage banks across every sector. Rooftop by rooftop, the darkness breaks. Zulana Central Hospital reaches full voltage across all wards. The incubators are stable! Valdaria retreats: Fall back! You cannot wage war on a grid that lives in every single home.",
+                svg: `<svg viewBox="0 0 200 140" class="w-full h-full">
+                    <rect width="200" height="140" fill="#091322"/>
+                    <!-- Golden Sunset Glow -->
+                    <path d="M0 80 Q100 65 200 80 L200 140 L0 140 Z" fill="#78350F" opacity="0.3"/>
+                    <!-- Shimmering Illuminated City -->
+                    <rect x="20" y="70" width="22" height="60" fill="#1E293B"/>
+                    <circle cx="26" cy="78" r="2" fill="#FBBF24"/>
+                    <circle cx="34" cy="78" r="2" fill="#FBBF24"/>
+                    <circle cx="26" cy="88" r="2" fill="#FBBF24"/>
+                    <circle cx="34" cy="88" r="2" fill="#FBBF24"/>
+                    <!-- Zulana Central Hospital in Emerald Glow -->
+                    <rect x="70" y="60" width="35" height="70" fill="#064E3B" stroke="#10B981" stroke-width="2"/>
+                    <rect x="83" y="68" width="9" height="18" fill="#EF4444"/>
+                    <rect x="78" y="73" width="19" height="8" fill="#EF4444"/>
+                    <!-- Titan's BESS Vault Container -->
+                    <rect x="130" y="85" width="40" height="45" rx="3" fill="#0F172A" stroke="#10B981" stroke-width="2"/>
+                    <path d="M140 100 L148 100 M144 95 L144 105" stroke="#10B981" stroke-width="2"/>
+                    <rect x="155" y="95" width="8" height="15" fill="#10B981"/>
+                    <!-- Retreating Enemy Fleet -->
+                    <polygon points="175,25 190,20 180,30" fill="#64748B" opacity="0.6"/>
+                    <polygon points="150,15 165,12 155,20" fill="#64748B" opacity="0.6"/>
+                </svg>`
+            }
+        ];
+
+        let currentPrologueIndex = 0;
+
+        function openPrologueModal() {
+            currentPrologueIndex = 0;
+            document.getElementById('prologue-modal').classList.remove('hidden');
+            renderProloguePanel();
+            AudioFX.playChime();
+        }
+
+        function renderProloguePanel() {
+            const p = prologuePanels[currentPrologueIndex];
+            document.getElementById('prologue-panel-badge').textContent = p.badge;
+            document.getElementById('prologue-panel-title').textContent = p.title;
+            document.getElementById('prologue-panel-text').textContent = p.text;
+            document.getElementById('prologue-svg-art').innerHTML = p.svg;
+
+            // Update dot indicators
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById(`p-dot-${i}`);
+                if (i === currentPrologueIndex) {
+                    dot.className = "w-3 h-3 rounded-full bg-solaris-amber shadow-comic transition";
+                } else {
+                    dot.className = "w-3 h-3 rounded-full bg-slate-700 transition";
+                }
+            }
+
+            // Button states
+            document.getElementById('prologue-prev-btn').disabled = (currentPrologueIndex === 0);
+            const nextBtn = document.getElementById('prologue-next-btn');
+            if (currentPrologueIndex === 3) {
+                nextBtn.innerHTML = 'ENTER MISSION CONTROL ➔';
+                nextBtn.className = 'btn-swipe-white px-5 py-2 bg-solaris-emerald text-black font-tech font-black text-xs rounded-lg comic-border shadow-comic';
+            } else {
+                nextBtn.innerHTML = 'NEXT PANEL <i class="fa-solid fa-arrow-right ml-1"></i>';
+                nextBtn.className = 'btn-swipe-white px-5 py-2 bg-solaris-amber text-black font-tech font-black text-xs rounded-lg comic-border shadow-comic';
+            }
+
+            // Dictate aloud at 0.8x
+            SpeechEngine.currentMentor = 'narrator';
+            SpeechEngine.speak(p.narrateText);
+        }
+
+        function nextProloguePanel() {
+            if (currentPrologueIndex < 3) {
+                currentPrologueIndex++;
+                renderProloguePanel();
+                AudioFX.playChime();
+            } else {
+                skipPrologue();
+            }
+        }
+
+        function prevProloguePanel() {
+            if (currentPrologueIndex > 0) {
+                currentPrologueIndex--;
+                renderProloguePanel();
+                AudioFX.playChime();
+            }
+        }
+
+        function replayPrologueAudio() {
+            const p = prologuePanels[currentPrologueIndex];
+            SpeechEngine.currentMentor = 'narrator';
+            SpeechEngine.speak(p.narrateText);
+        }
+
+        function skipPrologue() {
+            window.speechSynthesis.cancel();
+            document.getElementById('prologue-modal').classList.add('hidden');
+            AudioFX.playChime();
+        }
+
+        // =============================================================
+        // 4. SUPERHERO SQUAD DISPATCH & SPEECH BUBBLE INTERACTION
+        // =============================================================
+        const mentors = {
+            aegis: {
+                name: "Commander Aegis",
+                avatarIcon: "fa-shield",
+                intro: "Commander Aegis reporting. True national security begins when every rooftop becomes a solar shield. Stand resilient, Zulana!",
+                dialogue: "You cannot wage war on a grid that lives in every single home!"
+            },
+            forge: {
+                name: "Forge",
+                avatarIcon: "fa-microchip",
+                intro: "Forge online! Tropical sun irradiance exceeds 1000 watts per square meter. Our crystalline silicon modules are operating at peak efficiency!",
+                dialogue: "Every rooftop PV module creates energy freedom for our people."
+            },
+            weaver: {
+                name: "Weaver",
+                avatarIcon: "fa-bolt",
+                intro: "Weaver in the skies! All microgrid interconnects are locked in. Community power is flowing freely across all sectors!",
+                dialogue: "Community lines hold strong when clean energy flows everywhere."
+            },
+            titan: {
+                name: "Titan",
+                avatarIcon: "fa-car-battery",
+                intro: "Titan holds the line! Lithium storage banks are secure! Hospital infant incubators will never run cold under my watch!",
+                dialogue: "Titan likes clean power! Hospital lights stay on all night!"
+            }
+        };
+
+        function heroCharacterSpeak(heroKey) {
+            const m = mentors[heroKey];
+            SpeechEngine.currentMentor = heroKey;
+            SpeechEngine.speak(m.intro);
+
+            // Trigger visual comic speech bubble
+            const bubble = document.getElementById('hero-bubble-box');
+            document.getElementById('hero-bubble-author').textContent = m.name.toUpperCase();
+            document.getElementById('hero-bubble-text').textContent = `"${m.intro}"`;
+            bubble.classList.remove('hidden');
+
+            clearTimeout(window.bubbleTimer);
+            window.bubbleTimer = setTimeout(() => {
+                bubble.classList.add('hidden');
+            }, 8000);
+
+            AudioFX.playChime();
+        }
+
+        // =============================================================
+        // 5. GUIDED WALKTHROUGH & SIMULATOR LOGIC
+        // =============================================================
+        const guideSteps = [
+            {
+                step: 1,
+                title: "STEP 1: THE CENTRALIZED SINGLE POINT OF FAILURE",
+                body: "When Zulana relied solely on the 700 kW Hyperion Dam, power was concentrated in a single physical location. A single missile strike fractured the dam, plunging the entire nation into a 100% blackout. Zulana Central Hospital's 600 kW critical medical load was left with only 48 hours before emergency generators failed.",
+                apply() { applySimScenario('breach'); }
+            },
+            {
+                step: 2,
+                title: "STEP 2: PHOTOVOLTAIC CONVERSION (DISTRIBUTED ROOFTOP SOLAR)",
+                body: "Zulana receives over 9 hours of peak tropical solar radiation daily (~1,000 W/m²). By mounting crystalline silicon solar panels across thousands of urban rooftops, sunlight photons knock electrons free from silicon atoms, generating up to 1,000 kW of decentralized Direct Current (DC) electricity right where people live.",
+                apply() {
+                    isDamBreached = true;
+                    document.getElementById('sim-sun-slider').value = 85;
+                    document.getElementById('sim-bat-slider').value = 20;
+                    updateDamButtonState();
+                    runMicrogridSim();
+                }
+            },
+            {
+                step: 3,
+                title: "STEP 3: TITAN'S BESS (BATTERY ENERGY STORAGE SYSTEMS)",
+                body: "Sunlight is intermittent—clouds pass and night falls. Titan safeguards high-capacity lithium Battery Energy Storage Systems (BESS) delivering up to 300 kW of buffered reserve power. Excess midday solar electricity charges these banks, guaranteeing continuous emergency supply 24/7.",
+                apply() {
+                    isDamBreached = true;
+                    document.getElementById('sim-sun-slider').value = 40;
+                    document.getElementById('sim-bat-slider').value = 90;
+                    updateDamButtonState();
+                    runMicrogridSim();
+                }
+            },
+            {
+                step: 4,
+                title: "STEP 4: DECENTRALIZED RESILIENCE (THE UNBREAKABLE NETWORK)",
+                body: "When the Hyperion Dam is breached (0 kW), decentralized rooftop solar (850 kW) combined with Titan's BESS reserves (210 kW) delivers over 1,060 kW—easily exceeding the hospital's 600 kW life-support demand. As Forge proved: You cannot defeat a grid that lives in every single home!",
+                apply() { applySimScenario('solar'); }
+            }
+        ];
+
+        let currentGuideStepIndex = 0;
+
+        function setGuideStep(stepNum) {
+            currentGuideStepIndex = stepNum - 1;
+            renderGuideStep();
+        }
+
+        function advanceGuideStep() {
+            currentGuideStepIndex = (currentGuideStepIndex + 1) % guideSteps.length;
+            renderGuideStep();
+        }
+
+        function renderGuideStep() {
+            const s = guideSteps[currentGuideStepIndex];
+            document.getElementById('guide-step-title').textContent = s.title;
+            document.getElementById('guide-step-body').textContent = s.body;
+
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`step-btn-${i}`);
+                if (i === currentGuideStepIndex + 1) {
+                    btn.className = "px-2.5 py-1 rounded bg-solaris-amber text-black font-bold";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded bg-solaris-slate text-slate-300 font-bold hover:bg-slate-700";
+                }
+            }
+
+            s.apply();
+            AudioFX.playChime();
+        }
+
+        let isDamBreached = false;
+
+        function updateDamButtonState() {
+            const btn = document.getElementById('dam-btn');
+            if (isDamBreached) {
+                btn.className = "btn-swipe-white px-3 py-1.5 bg-red-600/30 text-red-400 border border-red-500 text-xs font-tech font-bold rounded-lg transition";
+                btn.innerHTML = '<i class="fa-solid fa-burst mr-1"></i> BREACHED (0 kW)';
+            } else {
+                btn.className = "btn-swipe-white px-3 py-1.5 bg-blue-600/30 text-blue-300 border border-blue-400 text-xs font-tech font-bold rounded-lg transition";
+                btn.innerHTML = '<i class="fa-solid fa-water mr-1"></i> ONLINE (700 kW)';
+            }
+        }
+
+        function toggleDamSim() {
+            isDamBreached = !isDamBreached;
+            updateDamButtonState();
+            runMicrogridSim();
+            AudioFX.playChime();
+        }
+
+        function applySimScenario(type) {
+            const sunSlider = document.getElementById('sim-sun-slider');
+            const batSlider = document.getElementById('sim-bat-slider');
+            const guideName = document.getElementById('sim-guide-name');
+            const guideText = document.getElementById('sim-guide-text');
+
+            if (type === 'normal') {
+                isDamBreached = false;
+                sunSlider.value = 40;
+                batSlider.value = 50;
+                guideName.textContent = "Commander Aegis Tactical Note:";
+                guideText.textContent = "The Hyperion Dam generates 700 kW alone—more than enough for the 600 kW hospital load. But it's an exposed single point of failure!";
+            } else if (type === 'breach') {
+                isDamBreached = true;
+                sunSlider.value = 10;
+                batSlider.value = 15;
+                guideName.textContent = "Forge Warning Dispatch:";
+                guideText.textContent = "Dam breached! With minimal rooftop solar and depleted battery banks, hospital infant incubators face emergency collapse!";
+            } else if (type === 'solar') {
+                isDamBreached = true;
+                sunSlider.value = 85;
+                batSlider.value = 75;
+                guideName.textContent = "Titan BESS & Aegis Shield:";
+                guideText.textContent = "The dam is completely destroyed, but decentralized rooftop solar (850 kW) and Titan's battery storage buffer keep Zulana Hospital 100% online!";
+            }
+
+            updateDamButtonState();
+            runMicrogridSim();
+            AudioFX.playChime();
+        }
+
+        function runMicrogridSim() {
+            const sunlight = parseInt(document.getElementById('sim-sun-slider').value);
+            const battery = parseInt(document.getElementById('sim-bat-slider').value);
+
+            const solarKw = Math.round(sunlight * 10); // 0-1000 kW
+            const batteryKw = Math.round(battery * 3.0); // 0-300 kW
+            const damKw = isDamBreached ? 0 : 700;
+
+            document.getElementById('sim-sun-val').textContent = `${sunlight}% (${solarKw} kW)`;
+            document.getElementById('sim-bat-val').textContent = `${battery}% Reserve (${batteryKw} kW)`;
+
+            const totalKw = solarKw + batteryKw + damKw;
+            const criticalDemand = 600;
+
+            document.getElementById('sim-kw-dam').textContent = `${damKw} kW`;
+            document.getElementById('sim-kw-solar').textContent = `${solarKw} kW`;
+            document.getElementById('sim-kw-battery').textContent = `${batteryKw} kW`;
+            document.getElementById('sim-kw-total').textContent = `${totalKw.toLocaleString()} kW (Critical Demand: 600 kW)`;
+
+            document.getElementById('sim-badge-dam').textContent = `${damKw} kW`;
+            document.getElementById('sim-badge-pv').textContent = `${solarKw} kW`;
+            document.getElementById('sim-badge-bat').textContent = `${batteryKw} kW`;
+
+            const hospBadge = document.getElementById('sim-badge-hospital');
+            const hospCard = document.getElementById('sim-card-hospital');
+            const statusPill = document.getElementById('sim-status-pill');
+            const powerBar = document.getElementById('sim-power-bar');
+
+            const barPct = Math.min(100, Math.round((totalKw / criticalDemand) * 100));
+            powerBar.style.width = `${barPct}%`;
+
+            if (totalKw >= criticalDemand) {
+                hospBadge.className = 'text-[10px] font-mono font-bold text-solaris-emerald mt-1';
+                hospBadge.textContent = '100% ONLINE';
+                hospCard.className = 'p-2.5 rounded-xl border-2 border-solaris-emerald bg-emerald-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden';
+                statusPill.className = 'font-bold text-solaris-emerald';
+                statusPill.textContent = '100% RESILIENT';
+                powerBar.className = 'bg-solaris-emerald h-full transition-all duration-300';
+            } else if (totalKw >= 300) {
+                hospBadge.className = 'text-[10px] font-mono font-bold text-solaris-amber mt-1';
+                hospBadge.textContent = 'ICU STABILIZED';
+                hospCard.className = 'p-2.5 rounded-xl border-2 border-solaris-amber bg-amber-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden';
+                statusPill.className = 'font-bold text-solaris-amber';
+                statusPill.textContent = 'ICU BUFFER ACTIVE';
+                powerBar.className = 'bg-solaris-amber h-full transition-all duration-300';
+            } else {
+                hospBadge.className = 'text-[10px] font-mono font-bold text-red-400 mt-1';
+                hospBadge.textContent = 'BLACKOUT RISK';
+                hospCard.className = 'p-2.5 rounded-xl border-2 border-red-500 bg-red-950/40 text-center flex flex-col justify-between items-center transition relative overflow-hidden';
+                statusPill.className = 'font-bold text-red-400';
+                statusPill.textContent = 'CRITICAL DEFICIT';
+                powerBar.className = 'bg-red-500 h-full transition-all duration-300';
+            }
+        }
+
+        // =============================================================
+        // 6. 15 CORE SOLAR AWARENESS QUESTIONS (POP-UP QUIZ)
+        // Questions 6, 9, 15 use neutral schematic illustrations!
+        // =============================================================
+        const questionsRaw = [
+            {
+                id: 1,
+                category: "Photovoltaic Physics",
+                q: "How do photovoltaic (PV) solar cells generate electricity when sunlight strikes them?",
+                correct: "Sunlight photons knock electrons free from silicon atoms, creating direct electrical current.",
+                wrong: "Solar heat boils water inside sealed glass tubes to drive microscopic internal steam turbines.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="15" y="25" width="70" height="50" rx="4" fill="#0D192E" stroke="#F59E0B" stroke-width="2"/><line x1="15" y1="50" x2="85" y2="50" stroke="#F59E0B" stroke-width="1.5"/><line x1="38" y1="25" x2="38" y2="75" stroke="#F59E0B" stroke-width="1.5"/><line x1="62" y1="25" x2="62" y2="75" stroke="#F59E0B" stroke-width="1.5"/><circle cx="50" cy="12" r="7" fill="#F59E0B"/><path d="M48 20 L40 32 M52 20 L60 32" stroke="#EA580C" stroke-width="2" stroke-dasharray="2,2"/></svg>`,
+                explanation: "Photovoltaic cells operate via the photoelectric effect without any moving parts. Sunlight photons energize valence electrons inside doped silicon crystals, creating an immediate direct electrical current rather than utilizing mechanical thermal steam generation."
+            },
+            {
+                id: 2,
+                category: "Weather & Climate",
+                q: "Do solar panels completely stop generating electricity on cloudy or rainy afternoons?",
+                correct: "No, they still generate 10% to 25% of rated power from diffuse daylight piercing through clouds.",
+                wrong: "Yes, solar panels require 100% direct unobstructed sunlight beam or they automatically power down.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><path d="M25 45 Q30 25 45 30 Q60 20 70 35 Q85 35 80 50 Q85 65 70 65 L25 65 Q10 55 25 45 Z" fill="#334155" stroke="#000" stroke-width="2"/><line x1="30" y1="72" x2="25" y2="82" stroke="#38BDF8" stroke-width="2"/><line x1="50" y1="72" x2="45" y2="82" stroke="#38BDF8" stroke-width="2"/><line x1="70" y1="72" x2="65" y2="82" stroke="#38BDF8" stroke-width="2"/></svg>`,
+                explanation: "Solar panels do not require clear blue skies to function. They capture scattered diffuse solar radiation through cloud cover, sustaining 10% to 25% production while rain naturally washes accumulated debris from glass surfaces."
+            },
+            {
+                id: 3,
+                category: "Grid Security",
+                q: "Why are decentralized rooftop solar microgrids strategically safer than a single giant dam?",
+                correct: "They eliminate single points of failure so attacks cannot disable the entire nation's electrical power.",
+                wrong: "Decentralized microgrids require thousands of miles of high-voltage transmission cables across mountains.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="15" y="55" width="20" height="25" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/><polygon points="12,55 25,40 38,55" fill="#EA580C"/><rect x="65" y="55" width="20" height="25" fill="#0F172A" stroke="#F59E0B" stroke-width="1.5"/><polygon points="62,55 75,40 88,55" fill="#EA580C"/><path d="M35 60 Q50 40 65 60" stroke="#10B981" stroke-width="2" stroke-dasharray="3,3"/></svg>`,
+                explanation: "Centralized power stations like the Hyperion Dam create catastrophic single points of failure vulnerable to targeted sabotage. Dispersing generation across community rooftop microgrids guarantees that critical institutions like hospitals stay powered when disaster strikes."
+            },
+            {
+                id: 4,
+                category: "Materials Science",
+                q: "Which semiconductor element is used to manufacture more than 90% of global commercial solar panels?",
+                correct: "Crystalline Silicon (refined from natural silica quartz).",
+                wrong: "Pure Carbon Graphite (mined from metamorphic rock beds).",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><polygon points="50,15 85,35 85,75 50,92 15,75 15,35" fill="#1E293B" stroke="#F59E0B" stroke-width="2.5"/><circle cx="50" cy="50" r="14" fill="#0284C7"/><text x="50" y="56" font-family="Orbitron" font-size="14" font-weight="bold" fill="#FFF" text-anchor="middle">Si</text></svg>`,
+                explanation: "Crystalline silicon dominates modern commercial photovoltaic manufacturing. Refined from abundant silica quartz, silicon possesses the ideal semiconductor bandgap to capture photon energy efficiently, providing exceptional longevity, structural stability, and cost-effective modular scaling."
+            },
+            {
+                id: 5,
+                category: "Energy Storage",
+                q: "What is the primary function of Battery Energy Storage Systems (BESS) in solar grids?",
+                correct: "They store surplus daytime solar electricity to power lights and hospital equipment through the night.",
+                wrong: "They cool down solar panel arrays by absorbing hazardous excess ultraviolet radiation waves.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="22" y="24" width="56" height="60" rx="4" fill="#064E3B" stroke="#F59E0B" stroke-width="2"/><rect x="40" y="15" width="20" height="9" rx="2" fill="#10B981" stroke="#000" stroke-width="2"/><rect x="30" y="34" width="40" height="8" rx="2" fill="#34D399"/><rect x="30" y="48" width="40" height="8" rx="2" fill="#34D399"/><rect x="30" y="62" width="40" height="8" rx="2" fill="#34D399"/></svg>`,
+                explanation: "Solar panels naturally produce surplus kilowatt-hours during peak sun hours. Titan's lithium battery banks store this excess clean generation to provide continuous, uninterrupted power for hospital incubators and lighting throughout nights and dark storms."
+            },
+            {
+                id: 6,
+                category: "Power Electronics",
+                q: "What essential role does an electrical inverter perform in a residential rooftop solar system?",
+                correct: "It converts Direct Current (DC) from panels into Alternating Current (AC) used by home appliances.",
+                wrong: "It compresses electrical current into magnetic liquids so wires do not vibrate under load.",
+                // NEUTRAL SCHEMATIC: Does not reveal answer!
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="18" y="24" width="64" height="52" rx="4" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/><circle cx="34" cy="50" r="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/><circle cx="66" cy="50" r="8" fill="#1E293B" stroke="#10B981" stroke-width="1.5"/><line x1="44" y1="50" x2="56" y2="50" stroke="#F59E0B" stroke-width="2"/><polygon points="56,47 61,50 56,53" fill="#F59E0B"/></svg>`,
+                explanation: "Solar photovoltaic panels naturally output Direct Current (DC) electricity. Smart inverters safely transform this DC electricity into Alternating Current (AC), synchronizing voltage and frequency with residential medical equipment, local utilities, and interconnected community microgrids."
+            },
+            {
+                id: 7,
+                category: "Thermal Performance",
+                q: "Does intense ambient heat (above 25°C / 77°F) actually increase solar PV panel efficiency?",
+                correct: "No, panel efficiency decreases slightly due to the negative temperature coefficient of silicon voltage.",
+                wrong: "Yes, panels generate twice as much electricity in extreme heat because hotter silicon conducts faster.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="28" fill="#EA580C" stroke="#000" stroke-width="2"/><circle cx="50" cy="50" r="18" fill="#FBBF24"/><line x1="50" y1="12" x2="50" y2="4" stroke="#EA580C" stroke-width="3"/><line x1="50" y1="88" x2="50" y2="96" stroke="#EA580C" stroke-width="3"/><line x1="12" y1="50" x2="4" y2="50" stroke="#EA580C" stroke-width="3"/><line x1="88" y1="50" x2="96" y2="50" stroke="#EA580C" stroke-width="3"/></svg>`,
+                explanation: "Solar panels convert light photons, not ambient heat. High operating temperatures cause open-circuit voltage to decline by approximately 0.3% to 0.5% per degree Celsius above 25°C, making proper rear-panel ventilation essential for maximum yield."
+            },
+            {
+                id: 8,
+                category: "UN SDG 7",
+                q: "What is the primary milestone mandated by United Nations Sustainable Development Goal 7 (SDG 7)?",
+                correct: "Ensure universal access to affordable, reliable, sustainable, and modern clean energy by 2030.",
+                wrong: "Mandate that all developing nations construct centralized mega-dams to monopolize national power.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="35" fill="#F59E0B" stroke="#000" stroke-width="2"/><text x="50" y="65" font-family="Bangers" font-size="44" font-weight="bold" fill="#000" text-anchor="middle">7</text></svg>`,
+                explanation: "UN SDG 7 targets universal access to affordable, dependable, and clean modern energy for every global community by 2030. Decentralized solar microgrids represent the fastest, most equitable pathway to eradicate energy poverty and foster climate resilience."
+            },
+            {
+                id: 9,
+                category: "Durability & Warranty",
+                q: "What is the expected operating lifespan and performance warranty of Tier-1 solar panels?",
+                correct: "25 to 30+ years, while retaining over 80% to 85% of their initial rated power capacity.",
+                wrong: "3 to 5 years, after which the tempered glass melts and must be discarded into landfills.",
+                // NEUTRAL SCHEMATIC: Does not reveal warranty numbers!
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><path d="M50 15 L80 25 L80 55 Q80 80 50 90 Q20 80 20 55 L20 25 Z" fill="#1E293B" stroke="#F59E0B" stroke-width="2.5"/><circle cx="50" cy="52" r="14" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/><line x1="50" y1="42" x2="50" y2="52" stroke="#FBBF24" stroke-width="2"/><line x1="50" y1="52" x2="58" y2="52" stroke="#FBBF24" stroke-width="2"/></svg>`,
+                explanation: "High-grade solar panels feature 25 to 30-year manufacturer production warranties, degrading at a negligible ~0.5% annually. Encapsulated in heavy-duty tempered glass and aluminum framing, panels frequently produce clean, dependable electricity for well over three decades."
+            },
+            {
+                id: 10,
+                category: "Economics & Billing",
+                q: "What is 'Net Metering' in the context of residential grid-tied solar systems?",
+                correct: "A billing mechanism crediting homeowners for surplus solar electricity they export to the utility grid.",
+                wrong: "A physical wire net deployed over rooftops to prevent stray birds from perching on panels.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="35" fill="#0F172A" stroke="#000" stroke-width="2"/><circle cx="50" cy="50" r="28" fill="#1E293B"/><line x1="30" y1="50" x2="70" y2="50" stroke="#10B981" stroke-width="3"/><polygon points="30,45 22,50 30,55" fill="#10B981"/><polygon points="70,45 78,50 70,55" fill="#10B981"/></svg>`,
+                explanation: "Net metering relies on bi-directional electric meters. When residential solar panels generate more electricity than a home consumes, the surplus power is dispatched into the surrounding community grid, earning financial credits against subsequent nighttime utility electricity consumption."
+            },
+            {
+                id: 11,
+                category: "Sustainable Agriculture",
+                q: "What does the groundbreaking practice known as 'Agrivoltaics' accomplish?",
+                correct: "Co-locating crop farming underneath solar panels, reducing water loss while crops cool the panels.",
+                wrong: "Burning harvested crops inside solar panel enclosures to fuel synthetic daylight combustion.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="20" y="20" width="60" height="20" rx="3" fill="#0D9488" stroke="#000" stroke-width="2"/><line x1="25" y1="40" x2="25" y2="75" stroke="#64748B" stroke-width="3"/><line x1="75" y1="40" x2="75" y2="75" stroke="#64748B" stroke-width="3"/><path d="M40 75 Q42 55 50 50 Q58 55 60 75" fill="#10B981"/></svg>`,
+                explanation: "Agrivoltaics harmonizes agricultural harvesting with clean photovoltaic power generation. Elevated solar panels shield crops from excessive scorching and curtail soil evaporation, while plant transpiration naturally cools the undersides of panels, boosting overall electrical conversion efficiency."
+            },
+            {
+                id: 12,
+                category: "Panel Efficiency",
+                q: "Which solar panel type is generally more efficient and space-saving on residential roofs?",
+                correct: "Monocrystalline panels (distinguished by uniform dark single-crystal silicon structure).",
+                wrong: "Polycrystalline panels (composed of fragmented multi-crystal flakes with lower efficiency).",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="25" y="25" width="50" height="50" rx="6" fill="#020617" stroke="#F59E0B" stroke-width="2"/><line x1="50" y1="25" x2="50" y2="75" stroke="#334155" stroke-width="2"/><line x1="25" y1="50" x2="75" y2="50" stroke="#334155" stroke-width="2"/></svg>`,
+                explanation: "Monocrystalline modules are engineered from single pure silicon crystal ingots, achieving superior conversion efficiencies exceeding 20% to 23%. Their higher wattage density makes them the optimal choice when rooftop footprint is restricted during urgent urban installations."
+            },
+            {
+                id: 13,
+                category: "Emissions & Pollution",
+                q: "Do operating solar photovoltaic panels produce direct greenhouse gases or air pollutants?",
+                correct: "No, operating solar panels emit zero direct carbon emissions, particulate smog, or pollutants.",
+                wrong: "Yes, panels discharge small clouds of carbon monoxide whenever silicon semiconductor cells heat up.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="32" fill="#064E3B" stroke="#F59E0B" stroke-width="2"/><text x="50" y="58" font-family="Orbitron" font-size="20" font-weight="black" fill="#10B981" text-anchor="middle">0 CO₂</text></svg>`,
+                explanation: "Once manufactured and deployed, operating solar panels generate zero direct greenhouse gas emissions, soot, or toxic airborne pollutants. Displacing fossil fuels drastically improves community air quality and prevents respiratory illness while providing silent, reliable energy."
+            },
+            {
+                id: 14,
+                category: "Maintenance & Soiling",
+                q: "What effect does heavy accumulation of dust, dirt, and bird droppings (soiling) have on solar output?",
+                correct: "It physically blocks solar photons, potentially reducing electrical output by 5% to over 25%.",
+                wrong: "It actually enhances power output by functioning like a magnifying lens that focuses sunlight.",
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><rect x="20" y="30" width="60" height="45" rx="3" fill="#1E293B" stroke="#F59E0B" stroke-width="2"/><circle cx="35" cy="45" r="4" fill="#78350F"/><circle cx="55" cy="40" r="6" fill="#78350F"/><circle cx="65" cy="58" r="5" fill="#78350F"/><circle cx="45" cy="62" r="3" fill="#78350F"/></svg>`,
+                explanation: "Dust accumulation and organic soiling create a physical optical barrier that prevents sunlight photons from striking the active silicon wafer. Routine surface washing with water or automated cleaning robots quickly restores maximum electrical generation efficiency across arrays."
+            },
+            {
+                id: 15,
+                category: "Lifecycle & Energy Payback",
+                q: "What is the typical 'Energy Payback Time' (EPBT) for modern crystalline solar panels?",
+                correct: "Between 1 to 3 years of operation, after which they deliver 25+ years of net-positive clean power.",
+                wrong: "Over 45 years, meaning solar panels consume far more energy to manufacture than they ever produce.",
+                // NEUTRAL SCHEMATIC: Does not reveal answer!
+                svg: `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="28" fill="none" stroke="#10B981" stroke-width="3" stroke-dasharray="10,5"/><circle cx="50" cy="50" r="16" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/><line x1="50" y1="38" x2="50" y2="50" stroke="#FBBF24" stroke-width="2"/><line x1="50" y1="50" x2="58" y2="50" stroke="#FBBF24" stroke-width="2"/></svg>`,
+                explanation: "Modern solar panels typically offset all the energy invested in their extraction, manufacturing, and transport within 1 to 3 operational years. Throughout their 30-year lifecycle, they generate 10 to 20 times more net-positive clean electricity."
+            }
+        ];
+
+        let currentQIndex = 0;
+        let userScore = 0;
+        let randomizedQuestions = [];
+        let currentOptions = [];
+        let activeMentor = 'aegis';
+
+        function prepareRandomizedQuiz() {
+            randomizedQuestions = questionsRaw.map(item => {
+                const isCorrectFirst = Math.random() < 0.5;
+                return {
+                    ...item,
+                    isCorrectFirst: isCorrectFirst,
+                    options: isCorrectFirst ? [item.correct, item.wrong] : [item.wrong, item.correct],
+                    correctIndex: isCorrectFirst ? 0 : 1
+                };
+            });
+        }
+
+        function openQuizModal() {
+            const modal = document.getElementById('quiz-modal');
+            modal.classList.remove('hidden');
+            document.getElementById('modal-character-picker').classList.remove('hidden');
+            document.getElementById('modal-quiz-active').classList.add('hidden');
+            document.getElementById('modal-quiz-results').classList.add('hidden');
+            AudioFX.playChime();
+        }
+
+        function selectModalMentor(mentorKey) {
+            activeMentor = mentorKey;
+            SpeechEngine.currentMentor = mentorKey;
+            const m = mentors[mentorKey];
+
+            SpeechEngine.speak(m.intro);
+
+            document.getElementById('mentor-avatar-badge').innerHTML = `<i class="fa-solid ${m.avatarIcon}"></i>`;
+            document.getElementById('mentor-name-badge').textContent = m.name;
+
+            document.getElementById('modal-character-picker').classList.add('hidden');
+            document.getElementById('modal-quiz-active').classList.remove('hidden');
+
+            prepareRandomizedQuiz();
+            currentQIndex = 0;
+            userScore = 0;
+            document.getElementById('modal-score-badge').textContent = '0';
+
+            renderModalQuestion();
+        }
+
+        function renderModalQuestion() {
+            const qData = randomizedQuestions[currentQIndex];
+            const total = randomizedQuestions.length;
+
+            document.getElementById('modal-step-badge').textContent = `MISSION ${qData.id} / ${total}`;
+            document.getElementById('modal-category-badge').textContent = qData.category;
+            document.getElementById('modal-q-text').textContent = qData.q;
+            document.getElementById('modal-svg-container').innerHTML = qData.svg;
+
+            currentOptions = qData.options;
+            document.getElementById('modal-opt-0-text').textContent = currentOptions[0];
+            document.getElementById('modal-opt-1-text').textContent = currentOptions[1];
+
+            for (let i = 0; i < 2; i++) {
+                const btn = document.getElementById(`modal-opt-${i}`);
+                btn.disabled = false;
+                btn.className = 'btn-swipe-yellow w-full text-left p-3 rounded-xl border-2 border-slate-700 bg-solaris-navy hover:bg-solaris-slate text-xs sm:text-sm font-semibold transition comic-border shadow-comic flex items-center justify-between';
+                const icon = document.getElementById(`modal-opt-${i}-icon`);
+                icon.className = 'text-base hidden';
+                icon.innerHTML = '';
+            }
+
+            document.getElementById('modal-feedback-box').classList.add('hidden');
+            SpeechEngine.speak(qData.q);
+        }
+
+        function repeatCurrentDictation() {
+            if (currentQIndex < randomizedQuestions.length) {
+                SpeechEngine.speak(randomizedQuestions[currentQIndex].q);
+            }
+        }
+
+        function handleOptionSelect(chosenIdx) {
+            const qData = randomizedQuestions[currentQIndex];
+            const isCorrect = (chosenIdx === qData.correctIndex);
+
+            for (let i = 0; i < 2; i++) {
+                const btn = document.getElementById(`modal-opt-${i}`);
+                btn.disabled = true;
+                const icon = document.getElementById(`modal-opt-${i}-icon`);
+                icon.classList.remove('hidden');
+
+                if (i === qData.correctIndex) {
+                    btn.classList.remove('border-slate-700', 'bg-solaris-navy');
+                    btn.classList.add('border-solaris-emerald', 'bg-emerald-950/70', 'text-solaris-emerald');
+                    icon.innerHTML = '<i class="fa-solid fa-circle-check text-solaris-emerald"></i>';
+                } else if (i === chosenIdx && !isCorrect) {
+                    btn.classList.remove('border-slate-700', 'bg-solaris-navy');
+                    btn.classList.add('border-red-500', 'bg-red-950/70', 'text-red-400');
+                    icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500"></i>';
+                }
+            }
+
+            if (isCorrect) {
+                userScore++;
+                AudioFX.playChime();
+            } else {
+                AudioFX.playBuzzer();
+            }
+            document.getElementById('modal-score-badge').textContent = userScore;
+
+            const feedBox = document.getElementById('modal-feedback-box');
+            const feedBanner = document.getElementById('modal-feedback-banner');
+            const feedIcon = document.getElementById('modal-feedback-icon');
+            const feedTitle = document.getElementById('modal-feedback-title');
+            const feedExpl = document.getElementById('modal-feedback-expl');
+
+            feedBox.classList.remove('hidden', 'shake-animation');
+            feedExpl.textContent = qData.explanation;
+
+            if (isCorrect) {
+                feedBanner.className = 'p-3 rounded-xl comic-border flex items-center justify-between gap-3 shadow-comic bg-emerald-950/90 border-2 border-solaris-emerald';
+                feedIcon.className = 'w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold bg-solaris-emerald text-black shadow-comic pop-in';
+                feedIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+                feedTitle.className = 'font-comic text-base tracking-wide text-solaris-emerald uppercase';
+                feedTitle.textContent = 'TACTICAL HIT! GRID CHARGED!';
+            } else {
+                feedBox.classList.add('shake-animation');
+                feedBanner.className = 'p-3 rounded-xl comic-border flex items-center justify-between gap-3 shadow-comic bg-red-950/90 border-2 border-red-500';
+                feedIcon.className = 'w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold bg-red-600 text-white shadow-comic pop-in';
+                feedIcon.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                feedTitle.className = 'font-comic text-base tracking-wide text-red-400 uppercase';
+                feedTitle.textContent = 'RECON ALERT! TACTICAL CORRECTION:';
+
+                SpeechEngine.speak(qData.explanation);
+            }
+        }
+
+        function goToNextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < randomizedQuestions.length) {
+                renderModalQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('modal-quiz-active').classList.add('hidden');
+            const resScreen = document.getElementById('modal-quiz-results');
+            resScreen.classList.remove('hidden');
+
+            document.getElementById('final-score-val').textContent = userScore;
+            const finalMsgEl = document.getElementById('final-tier-msg');
+
+            // Exact result tier criteria matching prompt requirements
+            if (userScore === 15) {
+                finalMsgEl.className = 'text-sm font-bold text-solaris-emerald leading-relaxed';
+                finalMsgEl.textContent = "You are the winner. You have mastered the basic concepts of Solar Power! Zulana is 100% resilient!";
+                triggerConfettiBlast();
+                AudioFX.playPopper();
+                SpeechEngine.speak("You are the winner. You have mastered the basic concepts of Solar Power!");
+            } else if (userScore >= 10) {
+                finalMsgEl.className = 'text-sm font-bold text-solaris-gold leading-relaxed';
+                finalMsgEl.textContent = "You have great knowlegde about Solar Power! Keep Learning!";
+                SpeechEngine.speak("You have great knowlegde about Solar Power! Keep Learning!");
+            } else if (userScore >= 5) {
+                finalMsgEl.className = 'text-sm font-bold text-solaris-amber leading-relaxed';
+                finalMsgEl.textContent = "You are doing well! Keep trying!!";
+                SpeechEngine.speak("You are doing well! Keep trying!");
+            } else {
+                finalMsgEl.className = 'text-sm font-bold text-slate-300 leading-relaxed';
+                finalMsgEl.textContent = "Good effort! Remember, learning is a process. Take some time to go over the material, and you'll see progress on the next one.";
+                SpeechEngine.speak("Good effort! Remember, learning is a process. Take some time to go over the material, and you'll see progress on the next one.");
+            }
+        }
+
+        function triggerConfettiBlast() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 150,
+                    spread: 85,
+                    colors: ['#F59E0B', '#FBBF24', '#10B981', '#FFFFFF'],
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        function resetAndRestartQuiz() {
+            prepareRandomizedQuiz();
+            currentQIndex = 0;
+            userScore = 0;
+            document.getElementById('modal-score-badge').textContent = '0';
+            document.getElementById('modal-quiz-results').classList.add('hidden');
+            document.getElementById('modal-quiz-active').classList.remove('hidden');
+            renderModalQuestion();
+        }
+
+        function closeQuizModalImmediately() {
+            window.speechSynthesis.cancel();
+            document.getElementById('quiz-modal').classList.add('hidden');
+        }
+
+        function requestAbortQuiz() {
+            const abortModal = document.getElementById('abort-confirm-modal');
+            abortModal.classList.remove('hidden');
+            document.getElementById('abort-live-score').textContent = `${userScore} / 15`;
+            const m = mentors[activeMentor];
+            document.getElementById('abort-mentor-line').textContent = `${m.name}: "${m.dialogue}"`;
+            AudioFX.playBuzzer();
+        }
+
+        function cancelAbortMission() {
+            document.getElementById('abort-confirm-modal').classList.add('hidden');
+            AudioFX.playChime();
+        }
+
+        function confirmAbortMission() {
+            document.getElementById('abort-confirm-modal').classList.add('hidden');
+            closeQuizModalImmediately();
+
+            const flash = document.getElementById('flash-score-overlay');
+            flash.classList.remove('hidden');
+            document.getElementById('flash-score-text').textContent = `${userScore} / 15`;
+            const pct = Math.round((userScore / 15) * 100);
+            document.getElementById('flash-pct-text').textContent = `${pct}% Field Accuracy Achieved`;
+            AudioFX.playPopper();
+        }
+
+        function dismissFlashOverlay() {
+            document.getElementById('flash-score-overlay').classList.add('hidden');
+        }
+
+        // =============================================================
+        // 7. GOLDEN SUN CURSOR & SOLAR FLARE PARTICLE SPAWN
+        // =============================================================
+        document.addEventListener('click', (e) => {
+            const flare = document.createElement('div');
+            flare.className = 'solar-click-flare';
+            flare.style.left = `${e.clientX}px`;
+            flare.style.top = `${e.clientY}px`;
+            document.body.appendChild(flare);
+            setTimeout(() => flare.remove(), 550);
+
+            document.body.classList.add('sun-cursor-mode');
+            clearTimeout(window.sunCursorTimer);
+            window.sunCursorTimer = setTimeout(() => {
+                document.body.classList.remove('sun-cursor-mode');
+            }, 1200);
+        });
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize application on load
+        window.addEventListener('DOMContentLoaded', () => {
+            runMicrogridSim();
+            // Automatically launch Animated Prologue on first load
+            openPrologueModal();
+        });
+    </script>
+</body>
+</html>
